@@ -12,25 +12,38 @@ interface StorageState {
 }
 
 export class RecordsState {
-    @observable public records: Record[] = [];
+    @observable public allRecords: Record[] = [];
     @observable private lastRefresh: Date;
     @observable public refreshing: boolean = false;
+    @observable public query: string = "";
 
     @action
     public loadStorage = async () => {
         const jsonStorageState = localStorage.getItem(localStorageIdentifier);
         if (jsonStorageState) {
             const storageState: StorageState = JSON.parse(jsonStorageState);
-            this.records = storageState.records;
+            this.allRecords = storageState.records;
             this.lastRefresh = new Date(storageState.lastRefresh);
         }
         await this.refresh();
     }
 
+    @computed
+    public get visibleRecords() {
+        const { query, allRecords } = this;
+        if (query === "") {
+            return allRecords;
+        }
+        return allRecords.filter(record => record.quote.toLowerCase().includes(query.toLowerCase()));
+    }
+
+    @action
+    public filter = (query: string) => this.query = query;
+
     private storeStorage = () => {
         const jsonStorageState = JSON.stringify({
             version: localStorageVersion,
-            records: this.records,
+            records: this.allRecords,
             lastRefresh: this.lastRefresh.toString()
         });
         localStorage.setItem(localStorageIdentifier, jsonStorageState);
@@ -41,7 +54,7 @@ export class RecordsState {
         this.refreshing = true;
         const records = await listRecords(this.lastRefresh);
         this.refreshing = false;
-        this.records = records;
+        this.allRecords = records;
         this.lastRefresh = new Date();
     }
 }
