@@ -25,6 +25,12 @@
     "@types/react" "*"
     "@types/react-icon-base" "*"
 
+"@types/react-infinite@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/react-infinite/-/react-infinite-0.0.29.tgz#031d7b1b825b8ab5ad2363c1d33146040b584938"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@~15.0.0":
   version "15.0.24"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-15.0.24.tgz#8a75299dc37906df327c18ca918bf97a55e7123b"
@@ -1713,6 +1719,14 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
+lodash.isarray@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-3.0.4.tgz#79e4eb88c36a8122af86f844aa9bcd851b5fbb55"
+
+lodash.isfinite@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.isfinite/-/lodash.isfinite-3.2.0.tgz#aa69ffb93a37e82fab0ce18862655f9174ced339"
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -1984,6 +1998,10 @@ number-is-nan@^1.0.0:
 oauth-sign@~0.8.1:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/oauth-sign/-/oauth-sign-0.8.2.tgz#46a6ab7f0aead8deae9ec0565780b7d4efeb9d43"
+
+object-assign@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.0.1.tgz#99504456c3598b5cad4fc59c26e8a9bb107fe0bd"
 
 object-assign@^4.0.1, object-assign@^4.1.0, object-assign@^4.1.1:
   version "4.1.1"
@@ -2879,6 +2897,14 @@ react-icons@~2.2.0:
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-2.2.5.tgz#f942501c21a4cc0456ce2bbee5032c93f6051dcf"
   dependencies:
     react-icon-base "2.0.7"
+
+react-infinite@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/react-infinite/-/react-infinite-0.10.0.tgz#04567469dd26b2f0d53bd9793bafbcd26e05c58b"
+  dependencies:
+    lodash.isarray "3.0.4"
+    lodash.isfinite "3.2.0"
+    object-assign "4.0.1"
 
 react-style-proptype@^2.0.0:
   version "2.0.2"
