@@ -14,7 +14,7 @@ export class PageRecords extends React.Component<{ recordsState?: RecordsState }
         return (
             <div>
                 <Query />
-                <Infinite elementHeight={110} useWindowAsScrollContainer>
+                <Infinite elementHeight={160} useWindowAsScrollContainer>
                     {records}
                 </Infinite>
             </div>
