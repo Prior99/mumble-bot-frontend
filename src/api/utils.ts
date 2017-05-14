@@ -9,7 +9,7 @@ export async function callApi(url: string, body?: any): Promise<any> {
         headers,
         body: JSON.stringify(body)
     });
-    return await response.json();
+    return (await response.json()).data;
 }
 
 export async function checkAuth(): Promise<boolean> {

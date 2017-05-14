@@ -13,6 +13,7 @@ import { baseUrl } from "../../../config";
 import { play } from "../../api";
 import * as moment from "moment";
 import "moment-duration-format";
+import { Visualization } from "./visualization";
 
 interface RecordingComponentProps {
     recording: Recording;
@@ -20,7 +21,8 @@ interface RecordingComponentProps {
 
 export class RecordingComponent extends React.Component<RecordingComponentProps, undefined> {
     public render() {
-        const { quote, id, duration, submitted, reporter, user, labels } = this.props.recording;
+        const { recording } = this.props;
+        const { quote, id, duration, submitted, reporter, user, labels } = recording;
         const onPlay = () => play(id);
         const labelElements = labels.map(label => <div>{label.name}</div>)
         return (
@@ -37,7 +39,7 @@ export class RecordingComponent extends React.Component<RecordingComponentProps,
                                     <div className={style.duration}><MdDuration /> {moment.duration(duration, "seconds").format("m [min] s [sec]", 2)}</div>
                                 </div>
                             </div>
-                            <div className={style.visualization}></div>
+                            <Visualization recording={recording}/ >
                         </div>
                         <div className={style.rightContent}>
                             <Button
