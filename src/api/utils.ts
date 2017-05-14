@@ -16,7 +16,7 @@ export async function checkAuth(): Promise<boolean> {
     const headers = new Headers();
     headers.append("authorization", loginState.authToken);
     try {
-        const response = await fetch(`${baseUrl}/user/usernameAvailable`, {
+        const response = await fetch(`${baseUrl}/users/usernameAvailable`, {
             method: "GET",
             headers
         });
