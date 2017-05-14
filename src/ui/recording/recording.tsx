@@ -1,4 +1,5 @@
 import * as React from "react";
+import { inject, observer } from "mobx-react";
 import { Recording } from "../../types";
 import * as style from "./style.scss";
 import { Card, CardText, CardActions } from "react-toolbox/lib/card";
@@ -14,15 +15,21 @@ import { play } from "../../api";
 import * as moment from "moment";
 import "moment-duration-format";
 import { Visualization } from "./visualization";
+import { UsersState } from "../../store";
 
 interface RecordingComponentProps {
     recording: Recording;
+    users?: UsersState;
 }
 
+@inject("users")
+@observer
 export class RecordingComponent extends React.Component<RecordingComponentProps, undefined> {
     public render() {
-        const { recording } = this.props;
-        const { quote, id, duration, submitted, reporter, user, labels } = recording;
+        const { recording, users } = this.props;
+        const { quote, id, duration, submitted, reporter: reporterId, user: userId, labels } = recording;
+        const user = users.getUser(userId);
+        const reporter = users.getUser(reporterId);
         const onPlay = () => play(id);
         const labelElements = labels.map(label => <div>{label.name}</div>)
         return (

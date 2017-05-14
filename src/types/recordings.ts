@@ -5,11 +5,11 @@ export interface Recording {
     id: number;
     quote: string;
     used: number;
-    user: User;
+    user: number;
     submitted: Date;
     duration: number;
     changed: Date;
-    reporter: User;
+    reporter: number;
     overwrite: number;
     parent: number;
     labels: Label[];

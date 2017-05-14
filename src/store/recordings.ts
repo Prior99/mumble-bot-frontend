@@ -54,8 +54,9 @@ export class RecordingsState {
         this.refreshing = true;
         const recordings = await listRecordings(this.lastRefresh);
         this.refreshing = false;
-        this.allRecordings = recordings;
+        this.allRecordings = [...this.allRecordings, ...recordings];
         this.lastRefresh = new Date();
+        this.storeStorage();
     }
 }
 
