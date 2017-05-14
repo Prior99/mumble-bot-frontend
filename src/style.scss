@@ -4,8 +4,10 @@ body {
     margin: 0;
     padding: 0;
     font-size: 32pt;
-    @media (max-width: $breakpoint-m) {
-    }
-    @media (min-width: $breakpoint-m) {
-    }
+}
+
+h1 {
+    font-size: 32pt;
+    font-weight: normal;
+    margin-bottom: 10pt;
 }

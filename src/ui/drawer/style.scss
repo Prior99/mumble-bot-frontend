@@ -1,0 +1,16 @@
+@import "../../breakpoints.scss";
+
+.drawer {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    @media (max-width: $breakpoint-m) {
+        display: none;
+    }
+    @media (min-width: $breakpoint-m) {
+        display: block;
+    }
+}

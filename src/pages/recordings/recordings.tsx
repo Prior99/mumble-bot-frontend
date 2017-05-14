@@ -13,6 +13,7 @@ export class PageRecordings extends React.Component<{ recordings?: RecordingsSta
         ));
         return (
             <div>
+                <h1>Recordings</h1>
                 <Query />
                 <Infinite elementHeight={160} useWindowAsScrollContainer>
                     {recordings}
