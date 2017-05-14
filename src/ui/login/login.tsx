@@ -7,9 +7,9 @@ import { LoginState } from "../../store";
 import { Card, CardTitle, CardText, CardActions } from "react-toolbox/lib/card";
 import * as style from "./style.scss";
 
-@inject("loginState")
+@inject("login")
 @observer
-export class Login extends React.Component<{ loginState?: LoginState }, undefined> {
+export class Login extends React.Component<{ login?: LoginState }, undefined> {
     public render() {
         const {
             updateUsername,
@@ -20,7 +20,7 @@ export class Login extends React.Component<{ loginState?: LoginState }, undefine
             username,
             password,
             failed
-        } = this.props.loginState;
+        } = this.props.login;
         return (
             <Card className={style.card}>
                 <CardTitle>Login</CardTitle>

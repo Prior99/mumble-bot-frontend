@@ -1,3 +1,3 @@
 export * from "./login";
-export * from "./record";
+export * from "./recording";
 export * from "./query";

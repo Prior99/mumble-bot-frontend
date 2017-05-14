@@ -1,3 +1,4 @@
-export * from "./record";
-export * from "./user";
-export * from "./label";
+export * from "./recordings";
+export * from "./users";
+export * from "./labels";
+

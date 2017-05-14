@@ -1,7 +1,7 @@
-import { User } from "./user";
-import { Label } from "./label";
+import { User } from "./users";
+import { Label } from "./labels";
 
-export interface Record {
+export interface Recording {
     id: number;
     quote: string;
     used: number;

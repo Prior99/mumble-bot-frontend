@@ -1,9 +1,9 @@
-import { loginState } from "../store";
+import { login } from "../store";
 import { baseUrl } from "../../config";
 
 export async function callApi(url: string, body?: any): Promise<any> {
     const headers = new Headers();
-    headers.append("authorization", loginState.authToken);
+    headers.append("authorization", login.authToken);
     const response = await fetch(`${baseUrl}${url}`, {
         method: "GET",
         headers,
@@ -14,9 +14,9 @@ export async function callApi(url: string, body?: any): Promise<any> {
 
 export async function checkAuth(): Promise<boolean> {
     const headers = new Headers();
-    headers.append("authorization", loginState.authToken);
+    headers.append("authorization", login.authToken);
     try {
-        const response = await fetch(`${baseUrl}/users/usernameAvailable`, {
+        const response = await fetch(`${baseUrl}/authorized`, {
             method: "GET",
             headers
         });

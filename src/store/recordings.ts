@@ -1,18 +1,18 @@
 import { observable, computed, action } from "mobx";
-import { listRecords } from "../api";
-import { Record } from "../types/record";
+import { listRecordings } from "../api";
+import { Recording } from "../types/recordings";
 
-const localStorageIdentifier = "mumble-bot-records-state";
+const localStorageIdentifier = "mumble-bot-recordings-state";
 const localStorageVersion = 1;
 
 interface StorageState {
     version: number;
     lastRefresh: string;
-    records: Record[];
+    recordings: Recording[];
 }
 
-export class RecordsState {
-    @observable public allRecords: Record[] = [];
+export class RecordingsState {
+    @observable public allRecordings: Recording[] = [];
     @observable private lastRefresh: Date;
     @observable public refreshing: boolean = false;
     @observable public query: string = "";
@@ -22,19 +22,19 @@ export class RecordsState {
         const jsonStorageState = localStorage.getItem(localStorageIdentifier);
         if (jsonStorageState) {
             const storageState: StorageState = JSON.parse(jsonStorageState);
-            this.allRecords = storageState.records;
+            this.allRecordings = storageState.recordings;
             this.lastRefresh = new Date(storageState.lastRefresh);
         }
         await this.refresh();
     }
 
     @computed
-    public get visibleRecords() {
-        const { query, allRecords } = this;
+    public get visibleRecordings() {
+        const { query, allRecordings } = this;
         if (query === "") {
-            return allRecords;
+            return allRecordings;
         }
-        return allRecords.filter(record => record.quote.toLowerCase().includes(query.toLowerCase()));
+        return allRecordings.filter(recording => recording.quote.toLowerCase().includes(query.toLowerCase()));
     }
 
     @action
@@ -43,7 +43,7 @@ export class RecordsState {
     private storeStorage = () => {
         const jsonStorageState = JSON.stringify({
             version: localStorageVersion,
-            records: this.allRecords,
+            recordings: this.allRecordings,
             lastRefresh: this.lastRefresh.toString()
         });
         localStorage.setItem(localStorageIdentifier, jsonStorageState);
@@ -52,11 +52,13 @@ export class RecordsState {
     @action
     public refresh = async () => {
         this.refreshing = true;
-        const records = await listRecords(this.lastRefresh);
+        const recordings = await listRecordings(this.lastRefresh);
         this.refreshing = false;
-        this.allRecords = records;
+        this.allRecordings = recordings;
         this.lastRefresh = new Date();
     }
 }
 
-export const recordsState = new RecordsState();
+export const recordings = new RecordingsState();
+
+

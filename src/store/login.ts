@@ -75,4 +75,5 @@ export class LoginState {
     }
 }
 
-export const loginState = new LoginState();
+export const login = new LoginState();
+

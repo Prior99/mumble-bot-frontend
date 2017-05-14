@@ -5,6 +5,7 @@ export interface User {
     steamid: string;
     money: number;
     settings: {
-        record: boolean;
+        recording: boolean;
     };
 }
+

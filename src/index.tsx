@@ -5,15 +5,15 @@ import { Provider } from "mobx-react";
 import DevTools from "mobx-react-devtools";
 import * as Store from "./store";
 import { PageLogin, PageApp } from "./pages";
-import { LoginState, loginState, recordsState } from "./store";
+import { LoginState, login, recordings } from "./store";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "./style.scss";
 
-@inject("loginState")
+@inject("login")
 @observer
-class App extends React.Component<{ loginState?: LoginState }, undefined> {
+class App extends React.Component<{ login?: LoginState }, undefined> {
     public render() {
-        const { loggedIn } = this.props.loginState;
+        const { loggedIn } = this.props.login;
         return (
             <div>
                 {
@@ -27,8 +27,8 @@ class App extends React.Component<{ loginState?: LoginState }, undefined> {
 
 
 async function main() {
-    await loginState.loadStorage();
-    await recordsState.loadStorage();
+    await login.loadStorage();
+    await recordings.loadStorage();
     ReactDOM.render(
         <Provider {...Store}>
             <App />
