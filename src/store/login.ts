@@ -80,4 +80,3 @@ export class LoginState {
 }
 
 export const login = new LoginState();
-

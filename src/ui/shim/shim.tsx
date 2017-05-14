@@ -1,7 +1,6 @@
 import * as React from "react";
 import ProgressBar from "react-toolbox/lib/progress_bar";
 import { observer, inject } from "mobx-react";
-import { observable, action } from "mobx";
 import * as style from "./style.scss";
 import { RecordingsState, UsersState, isLoading } from "../../store";
 

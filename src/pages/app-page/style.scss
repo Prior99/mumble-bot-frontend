@@ -20,3 +20,9 @@ $containerMargin: 10px;
     width: 100%;
     top: 0;
 }
+
+.hamburgerMenu {
+    @media (min-width: $breakpoint-m) {
+        display: none;
+    }
+}

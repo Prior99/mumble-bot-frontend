@@ -21,6 +21,3 @@ export class UsersState {
 }
 
 export const users = new UsersState();
-
-
-
