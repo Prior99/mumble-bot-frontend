@@ -6,6 +6,7 @@ import DevTools from "mobx-react-devtools";
 import * as Store from "./store";
 import { PageLogin, PageApp } from "./pages";
 import { LoginState, login, recordings, load } from "./store";
+import { Shim } from "./ui";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "./style.scss";
 
@@ -19,6 +20,7 @@ class App extends React.Component<{ login?: LoginState }, undefined> {
                 {
                     loggedIn ? <PageApp /> : <PageLogin />
                 }
+                <Shim />
                 <DevTools />
             </div>
         );
