@@ -2,10 +2,10 @@ import { callApi } from "./utils";
 import { Recording } from "../types";
 
 export async function listRecordings(since?: Date): Promise<Recording[]> {
-    if (since) {
-        const time = since.getTime();
-        return (await callApi(`/recordings/?since=${time}`)).recordings;
+    const time = since ? since.getTime() : undefined;
+    const url = since ? `/recordings/?since=${time}` : `/recordings`;
+    const response = await callApi(url);
+    if (response) {
+        return response.recordings;
     }
-    return (await callApi("/recordings/")).recordings;
 }
-

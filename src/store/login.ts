@@ -1,6 +1,7 @@
 import { observable, computed, action } from "mobx";
 import { SHA256 } from "crypto-js";
 import { checkAuth } from "../api";
+import { load } from "./utils";
 
 const localStorageIdentifier = "mumble-bot-login-state";
 const localStorageVersion = 1;
@@ -69,8 +70,11 @@ export class LoginState {
         const valid = await checkAuth();
         this.failed = !valid;
         this.loggedIn = valid;
-        if (valid && this.rememberMe) {
-            this.storeStorage();
+        if (valid) {
+            await load();
+            if (this.rememberMe) {
+                this.storeStorage();
+            }
         }
     }
 }

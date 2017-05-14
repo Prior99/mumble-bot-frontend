@@ -5,7 +5,7 @@ import { Provider } from "mobx-react";
 import DevTools from "mobx-react-devtools";
 import * as Store from "./store";
 import { PageLogin, PageApp } from "./pages";
-import { LoginState, login, recordings } from "./store";
+import { LoginState, login, recordings, load } from "./store";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "./style.scss";
 
@@ -17,7 +17,7 @@ class App extends React.Component<{ login?: LoginState }, undefined> {
         return (
             <div>
                 {
-                loggedIn ? <PageApp /> : <PageLogin />
+                    loggedIn ? <PageApp /> : <PageLogin />
                 }
                 <DevTools />
             </div>
@@ -28,7 +28,9 @@ class App extends React.Component<{ login?: LoginState }, undefined> {
 
 async function main() {
     await login.loadStorage();
-    await recordings.loadStorage();
+    if (login.loggedIn) {
+        await load();
+    }
     ReactDOM.render(
         <Provider {...Store}>
             <App />
