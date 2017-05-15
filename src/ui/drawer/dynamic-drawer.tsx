@@ -3,6 +3,7 @@ import { observer, inject } from "mobx-react";
 import * as style from "./style.scss";
 import { Drawer } from "react-toolbox/lib/drawer";
 import { UiState } from "../../store";
+import { Menu } from "./menu";
 
 @inject("ui")
 @observer
@@ -11,7 +12,9 @@ export class DynamicDrawer extends React.Component<{ ui?: UiState }, undefined> 
         const { ui } = this.props;
         const { drawerActive, toggleDrawer } = ui;
         return (
-            <Drawer active={drawerActive} onOverlayClick={toggleDrawer}/>
+            <Drawer active={drawerActive} onOverlayClick={toggleDrawer} className={style.dynamicDrawer}>
+                <Menu />
+            </Drawer>
         );
     }
 }

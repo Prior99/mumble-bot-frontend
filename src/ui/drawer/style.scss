@@ -6,6 +6,7 @@
     position: fixed;
     left: 0;
     top: 0;
+    padding-top: 60px;
 
     @media (max-width: $breakpoint-m) {
         display: none;
@@ -13,4 +14,8 @@
     @media (min-width: $breakpoint-m) {
         display: block;
     }
+}
+
+.dynamicDrawer {
+    padding-top: 60px;
 }
