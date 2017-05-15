@@ -20,6 +20,7 @@ export class PageLogin extends React.Component<LoginProps, undefined> {
             browserHistory.replace(routeRecordings());
         }
     }
+
     public render() {
         return (
             <div className={style.page}>

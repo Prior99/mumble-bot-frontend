@@ -4,12 +4,12 @@ import { checkAuth } from "../api";
 import { load } from "./utils";
 
 const localStorageIdentifier = "mumble-bot-login-state";
-const localStorageVersion = 1;
+const localStorageVersion = 2;
 
 interface StorageState {
     version: number;
     username: string;
-    authToken: string;
+    encryptedPassword: string;
     rememberMe: boolean;
 }
 
@@ -19,8 +19,7 @@ export class LoginState {
     @observable public rememberMe: boolean = false;
     @observable public username: string = "";
     @observable public password: string = "";
-    @observable private authTokenFromStorage: string;
-
+    @observable public encryptedPassword: string = "";
 
     @action
     public loadStorage = async () => {
@@ -29,8 +28,12 @@ export class LoginState {
             return;
         }
         const storageState: StorageState = JSON.parse(jsonStorageState);
+        if (storageState.version !== localStorageVersion) {
+            localStorage.removeItem(localStorageIdentifier);
+            return;
+        }
         this.username = storageState.username;
-        this.authTokenFromStorage = storageState.authToken;
+        this.encryptedPassword = storageState.encryptedPassword;
         this.rememberMe = storageState.rememberMe;
         this.loggedIn = true;
         await this.login();
@@ -40,7 +43,7 @@ export class LoginState {
         const jsonStorageState = JSON.stringify({
             version: localStorageVersion,
             username: this.username,
-            authToken: this.authToken,
+            encryptedPassword: this.encryptedPassword,
             rememberMe: this.rememberMe
         });
         localStorage.setItem(localStorageIdentifier, jsonStorageState);
@@ -48,10 +51,7 @@ export class LoginState {
 
     @computed
     public get authToken() {
-        if (this.authTokenFromStorage) {
-            return this.authTokenFromStorage;
-        }
-        const token = btoa(`${this.username}:${SHA256(this.password)}`);
+        const token = btoa(`${this.username}:${this.encryptedPassword}`);
         return `Basic ${token}`;
     }
 
@@ -67,6 +67,9 @@ export class LoginState {
 
     @action
     public login = async () => {
+        if (!this.encryptedPassword) {
+            this.encryptedPassword = SHA256(this.password).toString();
+        }
         const valid = await checkAuth();
         this.failed = !valid;
         this.loggedIn = valid;
@@ -74,6 +77,8 @@ export class LoginState {
             await load();
             if (this.rememberMe) {
                 this.storeStorage();
+            } else {
+                localStorage.removeItem(localStorageIdentifier);
             }
         }
     }

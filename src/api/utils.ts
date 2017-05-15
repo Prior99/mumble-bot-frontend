@@ -4,7 +4,7 @@ import { baseUrl } from "../../config";
 export async function callApi(url: string, body?: any): Promise<any> {
     const headers = new Headers();
     headers.append("authorization", login.authToken);
-    const response = await fetch(`${baseUrl}${url}`, {
+    const response = await fetch(`//${baseUrl}${url}`, {
         method: "GET",
         headers,
         body: JSON.stringify(body)
@@ -16,7 +16,7 @@ export async function checkAuth(): Promise<boolean> {
     const headers = new Headers();
     headers.append("authorization", login.authToken);
     try {
-        const response = await fetch(`${baseUrl}/authorized`, {
+        const response = await fetch(`//${baseUrl}/authorized`, {
             method: "GET",
             headers
         });
@@ -24,4 +24,13 @@ export async function checkAuth(): Promise<boolean> {
     } catch (err) {
         return false;
     }
+}
+
+export function callWebsocket(url: string): Promise<WebSocket> {
+    return new Promise((resolve) => {
+        const websocket = new WebSocket(`ws://${baseUrl}${url}`, [login.username, login.encryptedPassword]);
+        websocket.addEventListener("open", () => {
+            resolve(websocket);
+        });
+    });
 }
