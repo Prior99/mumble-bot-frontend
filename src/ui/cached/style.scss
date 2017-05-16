@@ -1,0 +1,57 @@
+@import "../../colors.scss";
+
+$outerPadding: 10px;
+
+.card {
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: $outerPadding;
+}
+
+.leftContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    .meta {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        color: grey;
+        font-style: italic;
+        margin-bottom: 5px;
+
+        div {
+            padding: 0 5px;
+            margin: 5px 0;
+        }
+
+        :not(:last-child) {
+            border-right: 1px solid $lightGrey;
+        }
+
+        :first-child {
+            padding-left: 0;
+        }
+
+        :last-child {
+            padding-right: 0;
+        }
+    }
+
+    margin: 0 10px 0 0;
+}
+
+.rightContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+        align-items: flex-start;
+}

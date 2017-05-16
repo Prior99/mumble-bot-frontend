@@ -1,0 +1,10 @@
+@import "../../colors.scss";
+
+.visualization {
+    width: 100%;
+    height: 50px;
+    background-color: $barelyWhite;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 100% 100%, 100% 100%;
+    border-bottom: 1px solid $grey;
+}

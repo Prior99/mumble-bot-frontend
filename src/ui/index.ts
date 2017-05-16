@@ -3,3 +3,4 @@ export * from "./recording";
 export * from "./query";
 export * from "./shim";
 export * from "./drawer"
+export * from "./visualization";

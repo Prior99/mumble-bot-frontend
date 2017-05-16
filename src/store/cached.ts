@@ -33,16 +33,26 @@ export class CachedState {
     @observable public allCachedRecordings: CachedRecording[] = [];
     @observable public cacheAmount: number = 0;
 
+    @computed
+    public get sorted() {
+        const sorted = [...this.allCachedRecordings];
+        sorted.sort((a, b) => b.date.getTime() - a.date.getTime());
+        return sorted;
+    }
+
     @action
     private handleInit = (message: MessageInit) => {
         const { list, cacheAmount } = message;
-        this.allCachedRecordings = list;
+        this.allCachedRecordings = list.map(cached => ({ ...cached, date: new Date(cached.date) }));
         this.cacheAmount = cacheAmount;
     }
 
     @action
     private handleAdd = (message: MessageAdd) => {
-        this.allCachedRecordings.push(message.recording);
+        this.allCachedRecordings.push({
+            ...message.recording,
+            date: new Date(message.recording.date)
+        });
     }
 
     @action

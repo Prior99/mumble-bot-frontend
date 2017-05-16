@@ -18,4 +18,3 @@ export class DynamicDrawer extends React.Component<{ ui?: UiState }, undefined> 
         );
     }
 }
-

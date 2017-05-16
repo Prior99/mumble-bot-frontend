@@ -1,5 +1,6 @@
-import { callApi } from "./utils";
+import { callApi, playAudio } from "./utils";
 import { Recording } from "../types";
+import { baseUrl } from "../../config";
 
 export async function listRecordings(since?: Date): Promise<Recording[]> {
     const time = since ? since.getTime() : undefined;
@@ -8,4 +9,12 @@ export async function listRecordings(since?: Date): Promise<Recording[]> {
     if (response) {
         return response.recordings;
     }
+}
+
+export async function play(recordingId: number): Promise<void> {
+    await callApi(`/recordings/${recordingId}/play`);
+}
+
+export function preview(id: number) {
+   playAudio(`//${baseUrl}/recordings/${id}/download`);
 }

@@ -7,4 +7,3 @@ export async function listUsers(): Promise<User[]> {
         return response.users;
     }
 }
-
