@@ -1,29 +1,17 @@
 @import "../../colors.scss";
 
-$outerPadding: 20px;
-$innerPadding: 10px;
+$outerPadding: 10px;
 
 .card {
     height: 140px;
     margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.bar {
-    padding: $innerPadding;
-    border-bottom: 1px solid $lightGrey;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 }
 
 .container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: $innerPadding $outerPadding $outerPadding $outerPadding;
+    padding: $outerPadding;
 }
 
 .leftContent {
@@ -70,4 +58,6 @@ $innerPadding: 10px;
 
 .protect {
     cursor: pointer;
+    width: 25px;
+    height: 25px;
 }

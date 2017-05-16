@@ -10,7 +10,7 @@ export async function protectCached(id: number): Promise<void> {
     await callApi(`/recordings/cached/${id}/protect`, undefined, "POST");
 }
 
-export async function removeCached(id: number): Promise<void> {
+export async function deleteCached(id: number): Promise<void> {
     await callApi(`/recordings/cached/${id}`, undefined, "DELETE");
 }
 
