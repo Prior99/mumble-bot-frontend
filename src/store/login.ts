@@ -74,7 +74,6 @@ export class LoginState {
         this.failed = !valid;
         this.loggedIn = valid;
         if (valid) {
-            await load();
             if (this.rememberMe) {
                 this.storeStorage();
             } else {

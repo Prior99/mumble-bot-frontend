@@ -36,7 +36,15 @@ export class CachedState {
     @computed
     public get sorted() {
         const sorted = [...this.allCachedRecordings];
-        sorted.sort((a, b) => b.date.getTime() - a.date.getTime());
+        sorted.sort((a, b) => {
+            if (b.protected && !a.protected) {
+                return 1;
+            }
+            if (a.protected && !b.protected) {
+                return -1;
+            }
+            return b.date.getTime() - a.date.getTime();
+        });
         return sorted;
     }
 
