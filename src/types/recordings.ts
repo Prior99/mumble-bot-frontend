@@ -12,5 +12,5 @@ export interface Recording {
     reporter: number;
     overwrite: number;
     parent: number;
-    labels: Label[];
+    labels: number[];
 }

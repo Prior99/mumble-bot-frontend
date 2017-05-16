@@ -32,6 +32,7 @@ type Message = MessageInit | MessageAdd | MessageRemove | MessageProtect;
 export class CachedState {
     @observable public allCachedRecordings: CachedRecording[] = [];
     @observable public cacheAmount: number = 0;
+    @observable public editing: number;
 
     @computed
     public get sorted() {

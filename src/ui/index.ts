@@ -4,3 +4,4 @@ export * from "./query";
 export * from "./shim";
 export * from "./drawer"
 export * from "./visualization";
+export * from "./label";

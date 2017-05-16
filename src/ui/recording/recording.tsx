@@ -17,6 +17,7 @@ import "moment-duration-format";
 import { Visualization } from "../visualization";
 import { UsersState } from "../../store";
 import { getRecordingVisualizationUrl } from "../../utils";
+import { LabelComponent } from "../";
 
 interface RecordingComponentProps {
     recording: Recording;
@@ -33,7 +34,7 @@ export class RecordingComponent extends React.Component<RecordingComponentProps,
         const reporter = users.getUser(reporterId);
         const onPlay = () => play(id);
         const onPreview = () => preview(id);
-        const labelElements = labels.map(label => <div>{label.name}</div>);
+        const labelElements = labels.map(labelId => <LabelComponent key={labelId} id={labelId} />);
         return (
             <Card className={style.card}>
                 <div className={style.container}>
