@@ -18,8 +18,50 @@
         text-align: center;
     }
 
+    .hoverAmount {
+        position: relative;
+
+        .text {
+            position: absolute;
+            top: 2;
+            left: 0;
+            opacity: 1;
+            height: 100%;
+            width: 100%;
+            transition: opacity 0.5s ease;
+        }
+
+        .icon {
+            position: absolute;
+            top: 2;
+            left: 0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            transition: opacity 0.5s ease;
+
+            > * {
+                transform: rotate(-90deg);
+                transition: transform 0.5s ease;
+            }
+        }
+    }
+
     .name {
         padding: 3px;
         margin-right: 10px;
+    }
+
+}
+
+.label:hover .text {
+    opacity: 0;
+}
+
+.label:hover .icon {
+    opacity: 1;
+
+    > * {
+        transform: rotate(0);
     }
 }

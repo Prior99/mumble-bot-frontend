@@ -6,3 +6,4 @@ export * from "./drawer"
 export * from "./visualization";
 export * from "./save-dialog";
 export * from "./label";
+export * from "./label-cloud";

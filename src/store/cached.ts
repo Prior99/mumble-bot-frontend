@@ -64,6 +64,8 @@ export class CachedState {
 
     @action public cancelSave = () => this.saveState = undefined;
 
+    public getCachedRecording = (id: number) => this.allCachedRecordings.find(recording => recording.id === id);
+
     @computed
     public get sorted() {
         const sorted = [...this.allCachedRecordings];

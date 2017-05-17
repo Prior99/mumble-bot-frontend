@@ -9,25 +9,39 @@ interface LabelComponentProps {
     id: number;
     labels?: LabelsState;
     amount?: boolean;
+    onClick?: () => void;
+    icon?: JSX.Element;
 }
 
 @inject("labels")
 @observer
 export class LabelComponent extends React.Component<LabelComponentProps, undefined> {
     public render() {
-        const { id, labels, amount } = this.props;
+        const { id, labels, amount, onClick, icon } = this.props;
         const label = labels.getLabel(id);
         const { recordings, name } = label;
         const relevance = labels.getRelevance(label);
-        const paleColor = colorize(name, 1, 0.8 + (1.0 - relevance) * 0.2);
-        const extraPaleColor = colorize(name, 1, 0.9 + (1.0 - relevance) * 0.1);
-        const nameColor = colorize(name, 0.5, 0.4);
+        const paleColor = colorize(name, 1, 0.7 + (1.0 - relevance) * 0.3);
+        const extraPaleColor = colorize(name, 1, 0.8 + (1.0 - relevance) * 0.2);
+        const nameColor = colorize(name, 0.3, 0.3 + (1.0 - relevance) * 0.4);
+        const computedStyle = {
+            background: paleColor,
+            // boxShadow: `${extraPaleColor} 0px 0px 5px 2px`,
+            border: `1px solid ${extraPaleColor}`,
+            cursor: onClick && "pointer"
+        };
+        const amountClassName = icon ? `${style.amount} ${style.hoverAmount}` : style.amount;
         return (
-            <div className={style.label} style={{ background: paleColor, boxShadow: `${extraPaleColor} 0px 0px 5px 2px` }}>
+            <div className={style.label} style={computedStyle} onClick={onClick}>
                 {
                     amount &&
-                    <div className={style.amount} style={{ background: extraPaleColor, color: nameColor }}>
-                        {recordings}
+                    <div className={amountClassName} style={{ background: extraPaleColor, color: nameColor }}>
+                        <div className={style.text}>
+                            {recordings}
+                        </div>
+                        <div className={style.icon}>
+                            {icon}
+                        </div>
                     </div>
                 }
                 <div className={style.name} style={{ color: nameColor, marginLeft: !amount && "10px" }}>

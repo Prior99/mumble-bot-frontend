@@ -14,6 +14,15 @@ export class LabelsState {
         this.labels = labels;
     }
 
+    @computed
+    public get sorted() {
+        const copy = [...this.labels];
+        copy.sort((a, b) =>
+            a.name.toLowerCase() > b.name.toLowerCase() ?  1 : b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 0
+        );
+        return copy;
+    }
+
     public getLabel(id: number): Label {
         return this.labels.find(user => user.id === id);
     }
