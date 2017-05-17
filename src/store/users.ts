@@ -1,6 +1,5 @@
 import { observable, computed, action } from "mobx";
 import { listUsers } from "../api";
-import { Recording } from "../types/recordings";
 import { User } from "../types";
 
 export class UsersState {

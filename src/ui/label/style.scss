@@ -1,0 +1,25 @@
+.label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-right: 10px;
+
+    .amount {
+        font-size: 14px;
+        border-radius: 16px;
+        height: 16px;
+        width: 16px;
+        padding: 2px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .name {
+        padding: 3px;
+        margin-right: 10px;
+    }
+}

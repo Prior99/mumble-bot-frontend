@@ -5,3 +5,4 @@ export * from "./shim";
 export * from "./drawer"
 export * from "./visualization";
 export * from "./save-dialog";
+export * from "./label";
