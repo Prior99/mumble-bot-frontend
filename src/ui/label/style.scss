@@ -1,8 +1,25 @@
-.chip {
-    height: 15px;
-}
+.label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 26px;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-right: 10px;
 
-.avatar {
-    height: 15px;
-    width: 15px;
+    .amount {
+        font-size: 18px;
+        border-radius: 20px;
+        height: 20px;
+        width: 20px;
+        padding: 3px;
+        margin-right: 10px;
+        text-align: center;
+    }
+
+    .name {
+        padding: 3px;
+        margin-right: 10px;
+    }
 }

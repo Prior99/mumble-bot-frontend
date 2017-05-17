@@ -13,13 +13,16 @@ export class LabelComponent extends React.Component<{ id: number, labels?: Label
         const label = labels.getLabel(id);
         const { recordings, name } = label;
         const relevance = labels.getRelevance(label);
-        const color = colorize(name, 1, 0.5 + (1.0 - relevance) * 0.5);
+        const paleColor = colorize(name, 1, 0.8 + (1.0 - relevance) * 0.2);
+        const strongColor = colorize(name, 1, 0.5 + (1.0 - relevance) * 0.2);
+        const nameColor = colorize(name, 0.8, 0.5);
+        const amountColor = colorize(name, 0.8, 0.9);
         return (
-            <div className={style.label} style={{ background: color }}>
-                <div className={style.amount}>
+            <div className={style.label} style={{ background: paleColor, border: `1px solid ${strongColor}` }}>
+                <div className={style.amount} style={{ background: strongColor, color: amountColor }}>
                     {recordings}
                 </div>
-                <div className={style.name}>
+                <div className={style.name} style={{ color: nameColor }}>
                     {name}
                 </div>
             </div>
