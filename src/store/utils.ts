@@ -9,5 +9,6 @@ export async function load() {
 }
 
 export function isLoading(users: UsersState, recordings: RecordingsState): boolean {
-    return users.refreshing || recordings.refreshing;
+    return users.loading || recordings.loading;
 }
+

@@ -17,25 +17,28 @@ import { playCached, previewCached, protectCached, deleteCached } from "../../ap
 import * as moment from "moment";
 import "moment-duration-format";
 import { Visualization } from "../visualization";
-import { UsersState } from "../../store";
+import { UsersState, CachedState } from "../../store";
 import { getCachedVisualizationUrl } from "../../utils";
 
 interface CachedComponentProps {
-    cached: CachedRecording;
+    cachedRecording: CachedRecording;
+    cached?: CachedState;
     users?: UsersState;
 }
 
-@inject("users")
+@inject("users", "cached")
 @observer
 export class CachedComponent extends React.Component<CachedComponentProps, undefined> {
     public render() {
-        const { cached, users } = this.props;
-        const { id, duration, user: userId, date, protected: isProtected } = cached;
+        const { cached, cachedRecording, users } = this.props;
+        const { startSaving } = cached;
+        const { id, duration, user: userId, date, protected: isProtected } = cachedRecording;
         const user = users.getUser(userId);
         const onPlay = () => playCached(id);
         const onPreview = () => previewCached(id);
         const onProtect = () => protectCached(id);
         const onDelete = () => deleteCached(id);
+        const onSave = () => startSaving(id);
         console.log(duration);
         return (
             <Card className={style.card}>
@@ -53,12 +56,13 @@ export class CachedComponent extends React.Component<CachedComponentProps, undef
                             <div className={style.submitted}><MdSubmitted /> {moment(date).format("HH:mm:ss")}</div>
                             <div className={style.duration}><MdDuration /> {moment.duration(duration, "seconds").format("m [min] s [sec]", 2)}</div>
                         </div>
-                        <Visualization url={getCachedVisualizationUrl(cached)} duration={duration}/ >
+                        <Visualization url={getCachedVisualizationUrl(cachedRecording)} duration={duration}/ >
                     </div>
                     <div className={style.rightContent}>
                         <Button
                             icon={<MdSave />}
                             label="Save"
+                            onClick={onSave}
                         />
                         <Button
                             onClick={onPlay}

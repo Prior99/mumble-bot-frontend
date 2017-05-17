@@ -6,10 +6,11 @@ type HTTPMethod = "DELETE" | "GET" | "PUT" | "POST";
 export async function callApi(url: string, body?: any, method: HTTPMethod = "GET"): Promise<any> {
     const headers = new Headers();
     headers.append("authorization", login.authToken);
+    headers.append("content-type", "application/json");
     const response = await fetch(`//${baseUrl}${url}`, {
         method: method,
         headers,
-        body: JSON.stringify(body)
+        body: JSON.stringify(body),
     });
     return (await response.json()).data;
 }

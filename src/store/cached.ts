@@ -1,6 +1,6 @@
 import { observable, computed, action } from "mobx";
 import { SHA256 } from "crypto-js";
-import { checkAuth } from "../api";
+import { checkAuth, saveCached } from "../api";
 import { load } from "./utils";
 import { CachedRecording } from "../types";
 import { baseUrl } from "../../config";
@@ -27,11 +27,42 @@ interface MessageProtect {
     id: number;
 }
 
+export interface SaveState {
+    id: number;
+    name: string;
+    labels: number[];
+}
+
 type Message = MessageInit | MessageAdd | MessageRemove | MessageProtect;
 
 export class CachedState {
     @observable public allCachedRecordings: CachedRecording[] = [];
     @observable public cacheAmount: number = 0;
+    @observable public saveState: SaveState;
+    @observable public loading: boolean = false;
+
+    @computed
+    public get saving() {
+        return this.saveState !== undefined;
+    }
+
+    @action public startSaving = (id: number) => this.saveState = { id, name: "", labels: [] };
+
+    @action public setSaveName = (name: string) => this.saveState.name = name;
+
+    @action public addSaveLabel = (id: number) => this.saveState.labels.push(id);
+
+    @action public removeSaveLabel = (id: number) =>
+        this.saveState.labels = this.saveState.labels.filter(label => label !== id);
+
+    @action public confirmSave = async () => {
+        this.loading = true;
+        await saveCached(this.saveState);
+        this.saveState = undefined;
+        this.loading = false;
+    }
+
+    @action public cancelSave = () => this.saveState = undefined;
 
     @computed
     public get sorted() {

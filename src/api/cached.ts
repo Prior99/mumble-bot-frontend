@@ -1,5 +1,5 @@
 import { callApi, playAudio } from "./utils";
-import { login } from "../store";
+import { login, SaveState } from "../store";
 import { baseUrl } from "../../config";
 
 export async function playCached(id: number): Promise<void> {
@@ -16,4 +16,8 @@ export async function deleteCached(id: number): Promise<void> {
 
 export function previewCached(id: number) {
    playAudio(`//${baseUrl}/recordings/cached/${id}/download`);
+}
+
+export async function saveCached(save: SaveState) {
+    await callApi(`/recordings/cached/${save.id}/save`, { quote: save.name, labels: save.labels }, "POST");
 }

@@ -14,7 +14,7 @@ interface StorageState {
 export class RecordingsState {
     @observable public allRecordings: Recording[] = [];
     @observable private lastRefresh: Date;
-    @observable public refreshing: boolean = false;
+    @observable public loading: boolean = false;
     @observable public query: string = "";
 
     @action
@@ -51,9 +51,9 @@ export class RecordingsState {
 
     @action
     public refresh = async () => {
-        this.refreshing = true;
+        this.loading = true;
         const recordings = await listRecordings(this.lastRefresh);
-        this.refreshing = false;
+        this.loading = false;
         this.allRecordings = [...this.allRecordings, ...recordings];
         this.lastRefresh = new Date();
         this.storeStorage();

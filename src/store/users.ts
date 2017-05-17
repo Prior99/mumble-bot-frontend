@@ -5,13 +5,13 @@ import { User } from "../types";
 
 export class UsersState {
     @observable public users: User[] = [];
-    @observable public refreshing: boolean = false;
+    @observable public loading: boolean = false;
 
     @action
     public load = async (): Promise<void> => {
-        this.refreshing = true;
+        this.loading = true;
         const users = await listUsers();
-        this.refreshing = false;
+        this.loading = false;
         this.users = users;
     }
 
