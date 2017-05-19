@@ -2,8 +2,10 @@ import * as React from "react";
 import { browserHistory } from "react-router";
 import * as MdRecords from "react-icons/lib/md/mic.js";
 import * as MdCached from "react-icons/lib/md/cached.js";
-import { List, ListItem } from "react-toolbox/lib/list";
+import * as MdQuiet from "react-icons/lib/md/volume-off.js";
+import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
 import { routeCached, routeRecordings } from "../../routing";
+import { shutUp } from "../../api";
 
 export class Menu extends React.Component<undefined, undefined> {
     public render() {
@@ -23,6 +25,13 @@ export class Menu extends React.Component<undefined, undefined> {
                     ripple
                     selectable
                     onClick={onRecordingsClick} />
+                <ListDivider />
+                <ListItem
+                    rightIcon={<MdQuiet />}
+                    caption="Shut up"
+                    ripple
+                    selectable
+                    onClick={shutUp} />
             </List>
         );
     }

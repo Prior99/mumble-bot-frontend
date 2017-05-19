@@ -1,3 +1,4 @@
+export * from "./bot";
 export * from "./cached";
 export * from "./labels";
 export * from "./recordings";

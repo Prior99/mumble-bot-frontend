@@ -1,1 +1,1 @@
-export const baseUrl = "auenland:23278";
+export const baseUrl = "localhost:23278";
