@@ -28,6 +28,8 @@ export class RecordingsState {
         await this.refresh();
     }
 
+    public getRecording = (id: number) => this.allRecordings.find(recording => recording.id === id);
+
     @computed
     public get visibleRecordings() {
         const { query, allRecordings } = this;

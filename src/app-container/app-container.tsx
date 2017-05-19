@@ -2,7 +2,7 @@ import * as React from "react";
 import AppBar from "react-toolbox/lib/app_bar";
 import { observer, inject } from "mobx-react";
 import * as style from "./style.scss";
-import { DynamicDrawer, FixedDrawer } from "../ui";
+import { DynamicDrawer, FixedDrawer, Widgets } from "../ui";
 import * as MdMenu from "react-icons/lib/md/menu.js";
 import { UiState, LoginState } from "../store";
 
@@ -34,6 +34,7 @@ export class AppContainer extends React.Component<{ ui?: UiState, login?: LoginS
                                 <div className={style.content}>
                                     {children}
                                 </div>
+                                <Widgets />
                             </div>
                         </div>
                     ) : children

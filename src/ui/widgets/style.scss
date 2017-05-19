@@ -1,0 +1,25 @@
+@import "../../breakpoints.scss";
+
+.widgets {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding-top: 70px;
+
+    @media (max-width: $breakpoint-l) {
+        display: none;
+    }
+    @media (min-width: $breakpoint-l) {
+        display: block;
+    }
+}
+
+.queueItem {
+    span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    width: 250px;
+}
