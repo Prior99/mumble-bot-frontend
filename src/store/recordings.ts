@@ -4,6 +4,7 @@ import { Recording } from "../types/recordings";
 
 const localStorageIdentifier = "mumble-bot-recordings-state";
 const localStorageVersion = 1;
+const REFRESH_INTERVAL = 3000;
 
 interface StorageState {
     version: number;
@@ -14,7 +15,7 @@ interface StorageState {
 export class RecordingsState {
     @observable public allRecordings: Recording[] = [];
     @observable private lastRefresh: Date;
-    @observable public loading: boolean = false;
+    @observable public loading: Date;
     @observable public query: string = "";
 
     @action
@@ -53,12 +54,13 @@ export class RecordingsState {
 
     @action
     public refresh = async () => {
-        this.loading = true;
+        this.loading = new Date();
         const recordings = await listRecordings(this.lastRefresh);
-        this.loading = false;
+        this.loading = undefined;
         this.allRecordings = [...this.allRecordings, ...recordings];
         this.lastRefresh = new Date();
         this.storeStorage();
+        setTimeout(this.refresh, REFRESH_INTERVAL);
     }
 }
 

@@ -33,3 +33,15 @@ $containerMargin: 10px;
         display: none;
     }
 }
+
+.progress {
+    margin: 0 15px 20px 0;
+}
+
+.circle {
+    width: 40px;
+    height: 40px;
+    circle {
+        stroke: white;
+    }
+}

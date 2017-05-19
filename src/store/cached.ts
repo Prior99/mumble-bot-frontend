@@ -39,7 +39,7 @@ export class CachedState {
     @observable public allCachedRecordings: CachedRecording[] = [];
     @observable public cacheAmount: number = 0;
     @observable public saveState: SaveState;
-    @observable public loading: boolean = false;
+    @observable public loading: Date;
 
     @computed
     public get saving() {
@@ -56,10 +56,10 @@ export class CachedState {
         this.saveState.labels = this.saveState.labels.filter(label => label !== id);
 
     @action public confirmSave = async () => {
-        this.loading = true;
+        this.loading = new Date();
         await saveCached(this.saveState);
         this.saveState = undefined;
-        this.loading = false;
+        this.loading = undefined;
     }
 
     @action public cancelSave = () => this.saveState = undefined;

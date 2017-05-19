@@ -58,7 +58,6 @@ export class QueueState {
         const socket = await callWebsocket("/queue");
         socket.addEventListener("message", event => {
             const message: Message = JSON.parse(event.data);
-            console.log(message);
             if (message.type === "init") {
                 return this.handleInit(message);
             }

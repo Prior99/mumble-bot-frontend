@@ -2,7 +2,7 @@ import * as React from "react";
 import ProgressBar from "react-toolbox/lib/progress_bar";
 import { observer, inject } from "mobx-react";
 import * as style from "./style.scss";
-import { RecordingsState, UsersState, isLoading } from "../../store";
+import { RecordingsState, UsersState, isLoadingTimeouted } from "../../store";
 
 interface ShimProps {
     users?: UsersState;
@@ -14,7 +14,7 @@ interface ShimProps {
 export class Shim extends React.Component<ShimProps, undefined> {
     render() {
         const { users, recordings } = this.props;
-        if (!isLoading(users, recordings)) {
+        if (!isLoadingTimeouted()) {
             return <div />;
         }
         return (

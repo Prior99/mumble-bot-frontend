@@ -5,6 +5,9 @@ import * as style from "./style.scss";
 import { DynamicDrawer, FixedDrawer, Widgets } from "../ui";
 import * as MdMenu from "react-icons/lib/md/menu.js";
 import { UiState, LoginState } from "../store";
+import ProgressBar from "react-toolbox/lib/progress_bar";
+import Navigation from "react-toolbox/lib/navigation";
+import { isLoading } from "../store";
 
 @inject("ui", "login")
 @observer
@@ -19,13 +22,24 @@ export class AppContainer extends React.Component<{ ui?: UiState, login?: LoginS
                     loggedIn ? (
                         <div>
                             <AppBar
-                                theme={{
-                                    leftIcon: style.hamburgerMenu
-                                }}
-                                leftIcon={<MdMenu />}
-                                onLeftIconClick={toggleDrawer}
-                                className={style.appBar}
-                            />
+                                    theme={{
+                                        leftIcon: style.hamburgerMenu
+                                    }}
+                                    title="Mumble Bot"
+                                    leftIcon={<MdMenu />}
+                                    onLeftIconClick={toggleDrawer}
+                                    className={style.appBar}>
+                                <Navigation type="horizontal">
+                                {
+                                    isLoading() &&
+                                    <ProgressBar
+                                        className={style.progress}
+                                        theme={{ circle: style.circle }}
+                                        type="circular"
+                                        mode="indeterminate" />
+                                }
+                                </Navigation>
+                            </AppBar>
                             <div className={style.container}>
                                 <div>
                                     <FixedDrawer />

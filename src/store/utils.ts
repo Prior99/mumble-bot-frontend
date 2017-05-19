@@ -4,6 +4,8 @@ import { cached } from "./cached";
 import { labels } from "./labels";
 import { queue } from "./queue";
 
+const LOAD_TIMEOUT = 2000;
+
 export async function load() {
     await recordings.loadStorage();
     await users.load();
@@ -12,7 +14,24 @@ export async function load() {
     await queue.init();
 }
 
-export function isLoading(users: UsersState, recordings: RecordingsState): boolean {
-    return users.loading || recordings.loading || labels.loading;
+function isTimeouted(date: Date) {
+    return typeof date === "object" && Date.now() - date.getTime() > LOAD_TIMEOUT;
 }
 
+function isBusy(date: Date) {
+    return typeof date === "object";
+}
+
+export function isLoadingTimeouted(): boolean {
+    return isTimeouted(users.loading) ||
+        isTimeouted(recordings.loading) ||
+        isTimeouted(cached.loading) ||
+        isTimeouted(labels.loading);
+}
+
+export function isLoading(): boolean {
+    return isBusy(users.loading) ||
+        isBusy(recordings.loading) ||
+        isBusy(cached.loading) ||
+        isBusy(labels.loading);
+}

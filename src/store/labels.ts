@@ -4,13 +4,13 @@ import { Label } from "../types";
 
 export class LabelsState {
     @observable public labels: Label[] = [];
-    @observable public loading: boolean = false;
+    @observable public loading: Date;
 
     @action
     public load = async (): Promise<void> => {
-        this.loading = true;
+        this.loading = new Date();
         const labels = await listLabels();
-        this.loading = false;
+        this.loading = undefined;
         this.labels = labels;
     }
 

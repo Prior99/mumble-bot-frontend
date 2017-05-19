@@ -4,13 +4,13 @@ import { User } from "../types";
 
 export class UsersState {
     @observable public users: User[] = [];
-    @observable public loading: boolean = false;
+    @observable public loading: Date;
 
     @action
     public load = async (): Promise<void> => {
-        this.loading = true;
+        this.loading = new Date();
         const users = await listUsers();
-        this.loading = false;
+        this.loading = undefined;
         this.users = users;
     }
 
