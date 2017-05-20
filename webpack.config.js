@@ -40,7 +40,7 @@ module.exports = {
                         query: {
                             modules: true,
                             importLoaders: 1,
-                            localIdentName: '[name]_[hash:base64:5]',
+                            localIdentName: '[name]_[local]_[hash:base64:5]',
                             sourceMap: true
                         }
                     },

@@ -12,4 +12,17 @@ export interface QueueItemSound {
     type: "sound";
 }
 
-export type QueueItem = QueueItemRecording | QueueItemSound;
+export interface QueueItemDialog {
+    time: Date;
+    user: number;
+    type: "dialog";
+}
+
+export interface QueueItemCachedRecording {
+    time: Date;
+    user: number;
+    cachedRecording: number;
+    type: "cached";
+}
+
+export type QueueItem = QueueItemRecording | QueueItemSound | QueueItemDialog | QueueItemCachedRecording;

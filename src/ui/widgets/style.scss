@@ -17,9 +17,11 @@
 }
 
 .queueItem {
-    span {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
     width: 250px;
+}
+
+.text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 170px;
 }

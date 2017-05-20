@@ -1,6 +1,8 @@
 import * as React from "react";
 import * as MdRecording from "react-icons/lib/md/mic";
 import * as MdSound from "react-icons/lib/md/play-arrow";
+import * as MdCached from "react-icons/lib/md/cached";
+import * as MdDialog from "react-icons/lib/md/list";
 import * as moment from "moment";
 import { observer, inject } from "mobx-react";
 import { Card, CardTitle, CardText } from "react-toolbox/lib/card";
@@ -10,15 +12,17 @@ import { RecordingsState } from "../../store/recordings";
 import { UsersState } from "../../store/users";
 import { QueueItem } from "../../types";
 import * as style from "./style.scss";
+import { CachedState } from "../../store";
 
 interface QueueItemElementProps {
     item: QueueItem;
     recordings: RecordingsState;
     users: UsersState;
+    cached: CachedState;
 }
 
 function QueueItemElement(props: QueueItemElementProps) {
-    const { item, recordings, users } = props;
+    const { item, recordings, users, cached } = props;
     const { time, user: userId } = item;
     const user = users.getUser(userId);
     const legend = `Added ${moment(time).format("HH:mm:ss")} by ${user.username}.`;
@@ -27,6 +31,7 @@ function QueueItemElement(props: QueueItemElementProps) {
         return (
             <ListItem
                 className={style.queueItem}
+                theme={{ itemText: style.text } as any}
                 leftIcon={<MdRecording />}
                 caption={recording.quote}
                 legend={legend}
@@ -37,8 +42,33 @@ function QueueItemElement(props: QueueItemElementProps) {
         return (
             <ListItem
                 className={style.queueItem}
+                theme={{ itemText: style.text } as any}
                 leftIcon={<MdSound />}
                 caption={"TODO: Not yet implemented"}
+                legend={legend}
+            />
+        );
+    }
+    if (item.type === "cached") {
+        const cachedRecording = cached.getCachedRecording(item.cachedRecording);
+        const recorder = users.getUser(cachedRecording.user);
+        return (
+            <ListItem
+                className={style.queueItem}
+                theme={{ itemText: style.text } as any}
+                leftIcon={<MdCached />}
+                caption={`${moment(cachedRecording.date).format("HH:mm:ss")} by ${recorder.username}`}
+                legend={legend}
+            />
+        );
+    }
+    if (item.type === "dialog") {
+        return (
+            <ListItem
+                className={style.queueItem}
+                theme={{ itemText: style.text } as any}
+                leftIcon={<MdDialog />}
+                caption={"Dialog part"}
                 legend={legend}
             />
         );
@@ -49,15 +79,16 @@ interface WidgetQueueProps {
     queue?: QueueState;
     recordings?: RecordingsState;
     users?: UsersState;
+    cached?: CachedState;
 }
 
-@inject("queue", "recordings", "users")
+@inject("queue", "recordings", "users", "cached")
 @observer
 export class WidgetQueue extends React.Component<WidgetQueueProps, undefined> {
     public render() {
-        const { queue: queueState, recordings, users } = this.props;
+        const { queue: queueState, recordings, users, cached } = this.props;
         const { queue } = this.props.queue;
-        const items = queue.map(item => QueueItemElement({item, recordings, users}));
+        const items = queue.map(item => QueueItemElement({item, recordings, users, cached}));
         return (
             <Card>
                 <CardTitle>Queue</CardTitle>
