@@ -8,3 +8,4 @@ export * from "./save-dialog";
 export * from "./label";
 export * from "./label-cloud";
 export * from "./widgets";
+export * from "./sound";

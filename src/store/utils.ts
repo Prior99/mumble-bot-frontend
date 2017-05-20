@@ -3,6 +3,7 @@ import { UsersState, users } from "./users";
 import { cached } from "./cached";
 import { labels } from "./labels";
 import { queue } from "./queue";
+import { sounds } from "./";
 
 const LOAD_TIMEOUT = 2000;
 
@@ -12,9 +13,11 @@ export async function load() {
     await cached.init();
     await labels.load();
     await queue.init();
+    await sounds.load();
 }
 
 function isTimeouted(date: Date) {
+    console.log(typeof date);
     return typeof date === "object" && Date.now() - date.getTime() > LOAD_TIMEOUT;
 }
 

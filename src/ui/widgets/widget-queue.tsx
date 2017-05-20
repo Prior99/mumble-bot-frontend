@@ -12,17 +12,18 @@ import { RecordingsState } from "../../store/recordings";
 import { UsersState } from "../../store/users";
 import { QueueItem } from "../../types";
 import * as style from "./style.scss";
-import { CachedState } from "../../store";
+import { CachedState, SoundsState } from "../../store";
 
 interface QueueItemElementProps {
     item: QueueItem;
     recordings: RecordingsState;
     users: UsersState;
     cached: CachedState;
+    sounds: SoundsState;
 }
 
 function QueueItemElement(props: QueueItemElementProps) {
-    const { item, recordings, users, cached } = props;
+    const { item, recordings, users, cached, sounds } = props;
     const { time, user: userId } = item;
     const user = users.getUser(userId);
     const legend = `Added ${moment(time).format("HH:mm:ss")} by ${user.username}.`;
@@ -39,12 +40,13 @@ function QueueItemElement(props: QueueItemElementProps) {
         );
     }
     if (item.type === "sound") {
+        const sound = sounds.getSound(item.sound);
         return (
             <ListItem
                 className={style.queueItem}
                 theme={{ itemText: style.text } as any}
                 leftIcon={<MdSound />}
-                caption={"TODO: Not yet implemented"}
+                caption={sound.name}
                 legend={legend}
             />
         );
@@ -80,15 +82,16 @@ interface WidgetQueueProps {
     recordings?: RecordingsState;
     users?: UsersState;
     cached?: CachedState;
+    sounds?: SoundsState;
 }
 
-@inject("queue", "recordings", "users", "cached")
+@inject("queue", "recordings", "users", "cached", "sounds")
 @observer
 export class WidgetQueue extends React.Component<WidgetQueueProps, undefined> {
     public render() {
-        const { queue: queueState, recordings, users, cached } = this.props;
+        const { queue: queueState, recordings, users, cached, sounds } = this.props;
         const { queue } = this.props.queue;
-        const items = queue.map(item => QueueItemElement({item, recordings, users, cached}));
+        const items = queue.map(item => QueueItemElement({ item, recordings, users, cached, sounds }));
         return (
             <Card>
                 <CardTitle>Queue</CardTitle>
