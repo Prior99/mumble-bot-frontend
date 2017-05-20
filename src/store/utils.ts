@@ -29,12 +29,14 @@ export function isLoadingTimeouted(): boolean {
     return isTimeouted(users.loading) ||
         isTimeouted(recordings.loading) ||
         isTimeouted(cached.loading) ||
-        isTimeouted(labels.loading);
+        isTimeouted(labels.loading) ||
+        isTimeouted(sounds.loading);
 }
 
 export function isLoading(): boolean {
     return isBusy(users.loading) ||
         isBusy(recordings.loading) ||
         isBusy(cached.loading) ||
-        isBusy(labels.loading);
+        isBusy(labels.loading) ||
+        isBusy(sounds.loading);
 }

@@ -30,7 +30,7 @@ export class SoundsState {
         this.loading = new Date();
         const sounds = await listSounds();
         this.loading = undefined;
-        this.allSounds = [...this.allSounds, ...sounds];
+        this.allSounds = sounds;
         this.lastRefresh = new Date();
         setTimeout(this.refresh, REFRESH_INTERVAL);
     }
