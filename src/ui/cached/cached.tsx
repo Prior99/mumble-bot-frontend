@@ -39,7 +39,6 @@ export class CachedComponent extends React.Component<CachedComponentProps, undef
         const onProtect = () => protectCached(id);
         const onDelete = () => deleteCached(id);
         const onSave = () => startSaving(id);
-        console.log(duration);
         return (
             <Card className={style.card}>
                 <div className={style.container}>

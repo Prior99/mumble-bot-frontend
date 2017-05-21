@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Route, Redirect, browserHistory } from "react-router";
-import { PageLogin, PageRecordings, PageCached, PageSounds } from "../pages";
+import { PageLogin, PageRecordings, PageCached, PageSounds, PageLink } from "../pages";
 import { AppContainer } from "../app-container";
 import { routeLogin } from "./routes";
 import { login } from "../store";
@@ -19,5 +19,6 @@ export const rootRoute = (
         <Route path="recordings" component={PageRecordings} onEnter={requireLogin} />
         <Route path="cached" component={PageCached} onEnter={requireLogin}/>
         <Route path="sounds" component={PageSounds} onEnter={requireLogin}/>
+        <Route path="link" component={PageLink} onEnter={requireLogin}/>
     </Route>
 );
