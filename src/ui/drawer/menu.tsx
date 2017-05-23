@@ -4,8 +4,9 @@ import * as MdRecords from "react-icons/lib/md/mic.js";
 import * as MdCached from "react-icons/lib/md/cached.js";
 import * as MdQuiet from "react-icons/lib/md/volume-off.js";
 import * as MdSounds from "react-icons/lib/md/play-arrow.js";
+import * as MdLink from "react-icons/lib/md/link.js";
 import { List, ListItem, ListDivider } from "react-toolbox/lib/list";
-import { routeCached, routeRecordings, routeSounds } from "../../routing";
+import { routeCached, routeRecordings, routeSounds, routeLink } from "../../routing";
 import { shutUp } from "../../api";
 
 export class Menu extends React.Component<undefined, undefined> {
@@ -13,6 +14,7 @@ export class Menu extends React.Component<undefined, undefined> {
         const onCachedClick = () => browserHistory.push(routeCached());
         const onRecordingsClick = () => browserHistory.push(routeRecordings());
         const onSoundsClick = () => browserHistory.push(routeSounds());
+        const onLinkClick = () => browserHistory.push(routeLink());
         return (
             <List>
                 <ListItem
@@ -40,6 +42,13 @@ export class Menu extends React.Component<undefined, undefined> {
                     ripple
                     selectable
                     onClick={shutUp} />
+                <ListDivider />
+                <ListItem
+                    rightIcon={<MdLink />}
+                    caption="Link to User"
+                    ripple
+                    selectable
+                    onClick={onLinkClick} />
             </List>
         );
     }
