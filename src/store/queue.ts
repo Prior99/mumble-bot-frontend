@@ -3,7 +3,6 @@ import { SHA256 } from "crypto-js";
 import { checkAuth, saveCached } from "../api";
 import { load } from "./utils";
 import { CachedRecording } from "../types";
-import { baseUrl } from "../../config";
 import { callWebsocket } from "../api/utils";
 import { QueueItem } from "../types/queue";
 

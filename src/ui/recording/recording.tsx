@@ -10,7 +10,6 @@ import * as MdPlayLocal from "react-icons/lib/md/headset.js";
 import * as MdDuration from "react-icons/lib/md/timer.js";
 import * as MdSubmitted from "react-icons/lib/md/event.js";
 import { Button } from "react-toolbox/lib/button";
-import { baseUrl } from "../../../config";
 import { play, preview } from "../../api";
 import * as moment from "moment";
 import "moment-duration-format";

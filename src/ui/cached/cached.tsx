@@ -12,7 +12,6 @@ import * as MdStarEmpty from "react-icons/lib/md/star-border.js";
 import * as MdStarFilled from "react-icons/lib/md/star.js";
 import * as MdSave from "react-icons/lib/md/save.js";
 import { Button } from "react-toolbox/lib/button";
-import { baseUrl } from "../../../config";
 import { playCached, previewCached, protectCached, deleteCached } from "../../api";
 import * as moment from "moment";
 import "moment-duration-format";

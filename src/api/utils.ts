@@ -1,5 +1,6 @@
 import { login } from "../store";
-import { baseUrl } from "../../config";
+
+declare var baseUrl: string;
 
 type HTTPMethod = "DELETE" | "GET" | "PUT" | "POST";
 
@@ -19,7 +20,7 @@ export async function checkAuth(): Promise<boolean> {
     const headers = new Headers();
     headers.append("authorization", login.authToken);
     try {
-        const response = await fetch(`//${baseUrl}/authorized`, {
+        const response = await fetch(`${window.location.protocol}//${baseUrl}/authorized`, {
             method: "GET",
             headers
         });
@@ -31,7 +32,8 @@ export async function checkAuth(): Promise<boolean> {
 
 export function callWebsocket(url: string): Promise<WebSocket> {
     return new Promise((resolve) => {
-        const websocket = new WebSocket(`ws://${baseUrl}${url}`, [login.username, login.encryptedPassword]);
+        const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+        const websocket = new WebSocket(`${protocol}//${baseUrl}${url}`, [login.username, login.encryptedPassword]);
         websocket.addEventListener("open", () => {
             resolve(websocket);
         });

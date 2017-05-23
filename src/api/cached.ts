@@ -1,6 +1,7 @@
 import { callApi, playAudio } from "./utils";
 import { login, SaveState } from "../store";
-import { baseUrl } from "../../config";
+
+declare var baseUrl: string;
 
 export async function playCached(id: number): Promise<void> {
     await callApi(`/recordings/cached/${id}/play`, undefined, "POST");

@@ -1,6 +1,7 @@
 import { callApi, playAudio } from "./utils";
 import { Recording } from "../types";
-import { baseUrl } from "../../config";
+
+declare var baseUrl: string;
 
 export async function listRecordings(since?: Date): Promise<Recording[]> {
     const time = since ? since.getTime() : undefined;
@@ -18,3 +19,4 @@ export async function play(recordingId: number): Promise<void> {
 export function preview(id: number) {
    playAudio(`//${baseUrl}/recordings/${id}/download`);
 }
+
