@@ -23,7 +23,7 @@ export class LabelsState {
         return copy;
     }
 
-    public getLabel(id: number): Label {
+    public getLabel = (id: number): Label => {
         return this.labels.find(user => user.id === id);
     }
 
@@ -34,6 +34,11 @@ export class LabelsState {
 
     public getRelevance(label: Label): number {
         return label.recordings / this.mostUsed.recordings;
+    }
+
+    @computed
+    public get labelsSource() {
+        return this.sorted.map(label => ({ value: label.id, label: label.name }));
     }
 }
 

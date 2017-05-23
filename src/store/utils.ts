@@ -17,7 +17,6 @@ export async function load() {
 }
 
 function isTimeouted(date: Date) {
-    console.log(typeof date);
     return typeof date === "object" && Date.now() - date.getTime() > LOAD_TIMEOUT;
 }
 

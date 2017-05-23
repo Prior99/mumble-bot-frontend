@@ -1,0 +1,42 @@
+.outer {
+    margin-bottom: 20px;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+
+    .users {
+        font-size: 12pt;
+    }
+}
+
+.users {
+    font-size: 12pt;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    > div {
+        margin-left: 10px;
+    }
+}
+
+.filterUser:not(:last-child)::after {
+    content: ", ";
+}
+
+.filterUser {
+    margin-left: 10px;
+    .removeButton {
+        cursor: pointer;
+        margin-right: 5px;
+        vertical-align: text-top;
+        color: grey;
+    }
+}
+
+.dropDown {
+    font-size: 12pt;
+    margin-left: 20px;
+}

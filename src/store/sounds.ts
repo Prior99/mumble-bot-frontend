@@ -2,6 +2,7 @@ import { observable, computed, action } from "mobx";
 import { listSounds } from "../api";
 import { Recording } from "../types/recordings";
 import { Sound } from "../types";
+import { filter } from "fuzzaldrin";
 
 const REFRESH_INTERVAL = 3000;
 
@@ -19,7 +20,7 @@ export class SoundsState {
         if (query === "") {
             return allSounds;
         }
-        return allSounds.filter(sound => sound.name.toLowerCase().includes(query.toLowerCase()));
+        return filter(allSounds, query, { key: "name" });
     }
 
     @action

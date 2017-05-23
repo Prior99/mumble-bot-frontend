@@ -14,8 +14,13 @@ export class UsersState {
         this.users = users;
     }
 
-    public getUser(id: number): User {
+    public getUser = (id: number): User => {
         return this.users.find(user => user.id === id);
+    }
+
+    @computed
+    public get usersDataSource() {
+        return this.users.map(user => ({ value: user.id, label: user.username }));
     }
 }
 
