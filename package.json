@@ -2,6 +2,7 @@
   "name": "mumble-bot",
   "version": "0.0.0",
   "scripts": {
+    "build": "webpack",
     "start": "webpack-dev-server"
   },
   "license": "MIT",
