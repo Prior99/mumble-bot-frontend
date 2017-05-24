@@ -5,4 +5,3 @@ export function colorize(text: string, saturation = 1, lightness = 0.875): strin
     const hue = rand.range(360);
     return `hsl(${hue},${saturation * 100}%,${lightness * 100}%)`;
 }
-

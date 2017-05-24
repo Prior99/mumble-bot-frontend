@@ -19,4 +19,3 @@ export async function play(recordingId: number): Promise<void> {
 export function preview(id: number) {
    playAudio(`//${baseUrl}/recordings/${id}/download`);
 }
-

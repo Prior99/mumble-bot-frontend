@@ -40,4 +40,3 @@ export class PageLink extends React.Component<LinkProps, undefined> {
         );
     }
 }
-

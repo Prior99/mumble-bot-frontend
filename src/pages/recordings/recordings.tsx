@@ -2,7 +2,7 @@ import * as React from "react";
 import { inject, observer } from "mobx-react";
 import { RecordingsState } from "../../store/recordings";
 import { RecordingComponent, Query } from "../../ui";
-import Infinite = require("react-infinite");
+import Infinite = require("react-infinite"); // tslint:disable-line
 
 @inject("recordings")
 @observer

@@ -14,12 +14,12 @@ interface StorageState {
 }
 
 export class LoginState {
-    @observable public loggedIn: boolean = false;
-    @observable public failed: boolean = false;
-    @observable public rememberMe: boolean = false;
-    @observable public username: string = "";
-    @observable public password: string = "";
-    @observable public encryptedPassword: string = "";
+    @observable public loggedIn = false;
+    @observable public failed = false;
+    @observable public rememberMe = false;
+    @observable public username = "";
+    @observable public password = "";
+    @observable public encryptedPassword = "";
 
     @action
     public loadStorage = async () => {

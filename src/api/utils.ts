@@ -9,9 +9,9 @@ export async function callApi(url: string, body?: any, method: HTTPMethod = "GET
     headers.append("authorization", login.authToken);
     headers.append("content-type", "application/json");
     const response = await fetch(`//${baseUrl}${url}`, {
-        method: method,
+        method,
         headers,
-        body: JSON.stringify(body),
+        body: JSON.stringify(body)
     });
     return (await response.json()).data;
 }
@@ -53,7 +53,7 @@ export function playAudio(url: string): Promise<undefined> {
         reader.addEventListener("load", () => {
             const wrongMime = "data:text/plain;base64";
             const correctMime = "data:audio/mpeg;base64";
-            const fixedMime = correctMime + reader.result.substr(wrongMime.length);
+            const fixedMime = `${correctMime}${reader.result.substr(wrongMime.length)}`;
             new Audio(fixedMime).play();
             resolve();
         });

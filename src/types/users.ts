@@ -6,4 +6,3 @@ export interface User {
         recording: boolean;
     };
 }
-

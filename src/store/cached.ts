@@ -36,7 +36,7 @@ type Message = MessageInit | MessageAdd | MessageRemove | MessageProtect;
 
 export class CachedState {
     @observable public allCachedRecordings: CachedRecording[] = [];
-    @observable public cacheAmount: number = 0;
+    @observable public cacheAmount = 0;
     @observable public saveState: SaveState;
     @observable public loading: Date;
 
@@ -52,7 +52,7 @@ export class CachedState {
     @action public addSaveLabel = (id: number) => this.saveState.labels.push(id);
 
     @action public removeSaveLabel = (id: number) =>
-        this.saveState.labels = this.saveState.labels.filter(label => label !== id);
+        this.saveState.labels = this.saveState.labels.filter(label => label !== id)
 
     @action public confirmSave = async () => {
         this.loading = new Date();

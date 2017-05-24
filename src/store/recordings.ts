@@ -17,7 +17,7 @@ export class RecordingsState {
     @observable public allRecordings: Recording[] = [];
     @observable private lastRefresh: Date;
     @observable public loading: Date;
-    @observable public query: string = "";
+    @observable public query = "";
     @observable public filterUsers: number[] = [];
     @observable public filterLabels: number[] = [];
 
@@ -62,21 +62,21 @@ export class RecordingsState {
     }
 
     @action
-    public filter = (query: string) => this.query = query;
+    public filter = (query: string) => this.query = query
 
     @action
-    public addFilterUser = (user: number) => this.filterUsers.push(user);
+    public addFilterUser = (user: number) => this.filterUsers.push(user)
 
     @action
     public removeFilterUser = (userId: number) =>
-        this.filterUsers = this.filterUsers.filter(user => user !== userId);
+        this.filterUsers = this.filterUsers.filter(user => user !== userId)
 
     @action
-    public addFilterLabel = (label: number) => this.filterLabels.push(label);
+    public addFilterLabel = (label: number) => this.filterLabels.push(label)
 
     @action
     public removeFilterLabel = (labelId: number) =>
-        this.filterLabels = this.filterLabels.filter(label => label !== labelId);
+        this.filterLabels = this.filterLabels.filter(label => label !== labelId)
 
     private storeStorage = () => {
         const jsonStorageState = JSON.stringify({

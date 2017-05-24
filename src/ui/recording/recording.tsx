@@ -42,10 +42,22 @@ export class RecordingComponent extends React.Component<RecordingComponentProps,
                             <div className={style.text}>
                                 <div className={style.quote}>{quote}</div>
                                 <div className={style.meta}>
-                                    <div className={style.reporter}><MdRecorder /> {reporter ? reporter.username : "Unknown"}</div>
-                                    <div className={style.user}><MdSaver /> {user ? user.username : "Unknown"}</div>
-                                    <div className={style.submitted}><MdSubmitted /> {moment(submitted).format("YYYY-MM-DD")}</div>
-                                    <div className={style.duration}><MdDuration /> {moment.duration(duration, "seconds").format("m [min] s [sec]", 2)}</div>
+                                    <div className={style.reporter}>
+                                        <MdRecorder />
+                                        {reporter ? reporter.username : "Unknown"}
+                                    </div>
+                                    <div className={style.user}>
+                                        <MdSaver />
+                                        {user ? user.username : "Unknown"}
+                                    </div>
+                                    <div className={style.submitted}>
+                                        <MdSubmitted />
+                                        {moment(submitted).format("YYYY-MM-DD")}
+                                    </div>
+                                    <div className={style.duration}>
+                                        <MdDuration />
+                                        {moment.duration(duration, "seconds").format("m [min] s [sec]", 2)}
+                                    </div>
                                 </div>
                             </div>
                             <Visualization

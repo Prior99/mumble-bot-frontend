@@ -50,9 +50,15 @@ export class CachedComponent extends React.Component<CachedComponentProps, undef
                             }
                         </div>
                         <div className={style.meta}>
-                            <div className={style.user}><MdRecorder /> {user ? user.username : "Unknown"}</div>
-                            <div className={style.submitted}><MdSubmitted /> {moment(date).format("HH:mm:ss")}</div>
-                            <div className={style.duration}><MdDuration /> {moment.duration(duration, "seconds").format("m [min] s [sec]", 2)}</div>
+                            <div className={style.user}>
+                                <MdRecorder /> {user ? user.username : "Unknown"}
+                            </div>
+                            <div className={style.submitted}>
+                                <MdSubmitted /> {moment(date).format("HH:mm:ss")}
+                            </div>
+                            <div className={style.duration}>
+                                <MdDuration /> {moment.duration(duration, "seconds").format("m [min] s [sec]", 2)}
+                            </div>
                         </div>
                         <Visualization url={getCachedVisualizationUrl(cachedRecording)} duration={duration}/ >
                     </div>

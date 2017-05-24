@@ -9,5 +9,3 @@ export function getRecordingVisualizationUrl(recording: Recording): string {
 export function getCachedVisualizationUrl(cached: CachedRecording): string {
     return `//${baseUrl}/recordings/cached/${cached.id}/visualize`;
 }
-
-

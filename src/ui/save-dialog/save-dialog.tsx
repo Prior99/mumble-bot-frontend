@@ -25,7 +25,7 @@ export class SaveDialog extends React.Component<{ cached?: CachedState }, undefi
             getCachedRecording
         } = this.props.cached;
         if (!saving) {
-            return null;
+            return <div />;
         }
         const { name, labels, id } = saveState;
         const cachedRecording = getCachedRecording(id);

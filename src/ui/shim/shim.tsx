@@ -12,7 +12,7 @@ interface ShimProps {
 @inject("users", "recordings")
 @observer
 export class Shim extends React.Component<ShimProps, undefined> {
-    render() {
+    public render() {
         const { users, recordings } = this.props;
         if (!isLoadingTimeouted()) {
             return <div />;
