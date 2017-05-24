@@ -5,9 +5,13 @@
 .wrapper {
     display: flex;
     flex-direction: row;
+    align-items: baseline;
 
     .users {
         font-size: 12pt;
+    }
+    > * {
+        margin-right: 15px;
     }
 }
 
@@ -38,5 +42,4 @@
 
 .dropDown {
     font-size: 12pt;
-    margin-left: 20px;
 }

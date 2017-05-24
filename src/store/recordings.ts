@@ -97,6 +97,12 @@ export class RecordingsState {
         this.storeStorage();
         setTimeout(this.refresh, REFRESH_INTERVAL);
     }
+
+    public getRandomVisible = (): Recording => {
+        const rand = Math.floor(Math.random() * this.visibleRecordings.length);
+        return this.visibleRecordings[rand];
+    }
+
 }
 
 export const recordings = new RecordingsState();

@@ -3,10 +3,13 @@ import { inject, observer } from "mobx-react";
 import Input from "react-toolbox/lib/input";
 import * as MdRemoveUser from "react-icons/lib/md/remove-circle";
 import * as MdRemoveLabel from "react-icons/lib/md/remove";
+import * as MdShuffle from "react-icons/lib/md/shuffle";
 import Dropdown from "react-toolbox/lib/dropdown";
 import { RecordingsState, UsersState, LabelsState } from "../../store";
 import * as style from "./style.scss";
 import { LabelComponent } from "../";
+import { IconButton } from "react-toolbox/lib/button";
+import { play } from "../../api";
 
 interface FilterUserProps {
     id: number;
@@ -48,10 +51,12 @@ export class Query extends React.Component<QueryProps, undefined> {
             addFilterUser,
             removeFilterUser,
             addFilterLabel,
-            removeFilterLabel
+            removeFilterLabel,
+            getRandomVisible
         } = recordings;
         const { usersDataSource } = users;
         const { labelsSource } = labels;
+        const playRandom = () => play(getRandomVisible().id);
         const filterUserElements = filterUsers.map(users.getUser).map(user => (
             <FilterUser id={user.id} onRemoveClick={() => removeFilterUser(user.id)} key={user.id} />
         ));
@@ -83,6 +88,7 @@ export class Query extends React.Component<QueryProps, undefined> {
                         className={style.dropDown}
                         label="Labels"
                     />
+                    <IconButton icon={<MdShuffle />} onClick={playRandom} />
                 </div>
                 {
                     filterUsers.length > 0 ?
