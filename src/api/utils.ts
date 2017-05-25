@@ -8,7 +8,7 @@ export async function callApi(url: string, body?: any, method: HTTPMethod = "GET
     const headers = new Headers();
     headers.append("authorization", login.authToken);
     headers.append("content-type", "application/json");
-    const response = await fetch(`//${baseUrl}${url}`, {
+    const response = await fetch(`${window.location.protocol}//${baseUrl}${url}`, {
         method,
         headers,
         body: JSON.stringify(body)
