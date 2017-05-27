@@ -33,7 +33,7 @@ export class QueueState {
     private handleInit = (message: MessageInit) => {
         const { queue } = message;
         this.queue = queue.map(queueItem => ({ ...queueItem, time: new Date(queueItem.time) }));
-    };
+    }
 
     @action
     private handleEnqueue = (message: MessageEnqueue) => {
@@ -41,17 +41,17 @@ export class QueueState {
             ...message.workitem,
             time: new Date(message.workitem.time)
         });
-    };
+    }
 
     @action
     private handleDequeue = (message: MessageDequeue) => {
         this.queue.shift();
-    };
+    }
 
     @action
     private handleClear = (message: MessageClear) => {
         this.queue = [];
-    };
+    }
 
     public init = async (): Promise<void> => {
         const socket = await callWebsocket("/queue");
@@ -70,8 +70,7 @@ export class QueueState {
                 return this.handleClear(message);
             }
         });
-    };
+    }
 }
 
 export const queue = new QueueState();
-

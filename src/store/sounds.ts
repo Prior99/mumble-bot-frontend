@@ -10,7 +10,7 @@ export class SoundsState {
     @observable public allSounds: Sound[] = [];
     @observable private lastRefresh: Date;
     @observable public loading: Date;
-    @observable public query: string = "";
+    @observable public query = "";
 
     public getSound = (id: number) => this.allSounds.find(sound => sound.id === id);
 
@@ -24,7 +24,7 @@ export class SoundsState {
     }
 
     @action
-    public filter = (query: string) => this.query = query;
+    public filter = (query: string) => this.query = query
 
     @action
     public refresh = async () => {

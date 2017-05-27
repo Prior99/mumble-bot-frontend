@@ -26,8 +26,7 @@ class App extends React.Component<{ login?: LoginState }, undefined> {
             </div>
         );
      }
-};
-
+}
 
 async function main() {
     await login.loadStorage();

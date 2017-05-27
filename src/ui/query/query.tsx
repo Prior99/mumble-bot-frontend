@@ -1,33 +1,15 @@
 import * as React from "react";
 import { inject, observer } from "mobx-react";
 import Input from "react-toolbox/lib/input";
-import * as MdRemoveUser from "react-icons/lib/md/remove-circle";
 import * as MdRemoveLabel from "react-icons/lib/md/remove";
+import * as MdShuffle from "react-icons/lib/md/shuffle";
 import Dropdown from "react-toolbox/lib/dropdown";
 import { RecordingsState, UsersState, LabelsState } from "../../store";
 import * as style from "./style.scss";
 import { LabelComponent } from "../";
-
-interface FilterUserProps {
-    id: number;
-    users?: UsersState;
-    onRemoveClick: Function;
-}
-
-@inject("users")
-@observer
-export class FilterUser extends React.Component<FilterUserProps, undefined> {
-    public render() {
-        const { users, id, onRemoveClick } = this.props;
-        const user = users.getUser(id);
-        return (
-            <div className={style.filterUser}>
-                <MdRemoveUser className={style.removeButton} onClick={onRemoveClick}/>
-                {user.username}
-            </div>
-        );
-    }
-}
+import { IconButton } from "react-toolbox/lib/button";
+import { play } from "../../api";
+import { FilterUser } from "./filter-user";
 
 interface QueryProps {
     recordings?: RecordingsState;
@@ -48,10 +30,12 @@ export class Query extends React.Component<QueryProps, undefined> {
             addFilterUser,
             removeFilterUser,
             addFilterLabel,
-            removeFilterLabel
+            removeFilterLabel,
+            getRandomVisible
         } = recordings;
         const { usersDataSource } = users;
         const { labelsSource } = labels;
+        const playRandom = () => play(getRandomVisible().id);
         const filterUserElements = filterUsers.map(users.getUser).map(user => (
             <FilterUser id={user.id} onRemoveClick={() => removeFilterUser(user.id)} key={user.id} />
         ));
@@ -83,16 +67,15 @@ export class Query extends React.Component<QueryProps, undefined> {
                         className={style.dropDown}
                         label="Labels"
                     />
+                    <IconButton icon={<MdShuffle />} onClick={playRandom} />
                 </div>
                 {
-                    filterUsers.length > 0 ?
-                        <div className={style.users}>Filtered by Users: {filterUserElements}</div> :
-                        null
+                    filterUsers.length > 0 &&
+                        <div className={style.users}>Filtered by Users: {filterUserElements}</div>
                 }
                 {
-                    filterLabels.length > 0 ?
-                        <div className={style.users}>Filtered by Labels: {filterLabelElements}</div> :
-                        null
+                    filterLabels.length > 0 &&
+                        <div className={style.users}>Filtered by Labels: {filterLabelElements}</div>
                 }
             </div>
         );
