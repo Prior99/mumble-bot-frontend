@@ -1,5 +1,9 @@
 .outer {
     margin-bottom: 20px;
+    position: sticky;
+    top: 64px;
+    z-index: 80;
+    background-color: rgb(255, 255, 255);
 }
 
 .wrapper {
@@ -42,4 +46,12 @@
 
 .dropDown {
     font-size: 12pt;
+}
+
+.query {
+    z-index: 85;
+
+    input {
+        z-index: 90;
+    }
 }

@@ -5,6 +5,7 @@ import { RecordingComponent, Query } from "../../ui";
 import { SoundsState } from "../../store";
 import { SoundComponent } from "../../ui/sound";
 import Infinite = require("react-infinite"); // tslint:disable-line
+import * as style from "./style.scss";
 
 @inject("sounds")
 @observer
@@ -17,11 +18,14 @@ export class PageSounds extends React.Component<{ sounds?: SoundsState }, undefi
         ));
         return (
             <div>
-                <h1>Sounds</h1>
-                <Input onChange={filter} value={query} hint="Search" />
-                <Infinite elementHeight={70} useWindowAsScrollContainer>
-                    {elements}
-                </Infinite>
+                <div className={style.input}>
+                    <Input onChange={filter} value={query} hint="Search" />
+                </div>
+                <div className={style.container}>
+                    <Infinite elementHeight={70} useWindowAsScrollContainer>
+                        {elements}
+                    </Infinite>
+                </div>
             </div>
         );
     }

@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { RecordingsState } from "../../store/recordings";
 import { RecordingComponent, Query } from "../../ui";
 import Infinite = require("react-infinite"); // tslint:disable-line
+import * as style from "./style.scss";
 
 @inject("recordings")
 @observer
@@ -13,11 +14,12 @@ export class PageRecordings extends React.Component<{ recordings?: RecordingsSta
         ));
         return (
             <div>
-                <h1>Recordings</h1>
                 <Query />
-                <Infinite elementHeight={160} useWindowAsScrollContainer>
-                    {recordings}
-                </Infinite>
+                <div className={style.container}>
+                    <Infinite elementHeight={160} useWindowAsScrollContainer>
+                        {recordings}
+                    </Infinite>
+                </div>
             </div>
         );
     }
