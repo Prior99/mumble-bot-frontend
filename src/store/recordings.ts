@@ -61,6 +61,11 @@ export class RecordingsState {
         return filteredRecordings;
     }
 
+    @computed
+    public get matchingAmount() {
+        return this.visibleRecordings.length;
+    }
+
     @action
     public filter = (query: string) => this.query = query
 

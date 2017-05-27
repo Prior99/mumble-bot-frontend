@@ -31,7 +31,8 @@ export class Query extends React.Component<QueryProps, undefined> {
             removeFilterUser,
             addFilterLabel,
             removeFilterLabel,
-            getRandomVisible
+            getRandomVisible,
+            matchingAmount
         } = recordings;
         const { usersDataSource } = users;
         const { labelsSource } = labels;
@@ -68,6 +69,9 @@ export class Query extends React.Component<QueryProps, undefined> {
                         label="Labels"
                     />
                     <IconButton icon={<MdShuffle />} onClick={playRandom} />
+                    <div className={style.matching}>
+                        {`${matchingAmount} found`}
+                    </div>
                 </div>
                 {
                     filterUsers.length > 0 &&
