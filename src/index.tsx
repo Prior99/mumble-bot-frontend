@@ -9,6 +9,7 @@ import { LoginState, login, recordings, load } from "./store";
 import { Shim } from "./ui";
 import { Router, browserHistory } from "react-router";
 import { rootRoute } from "./routing";
+import { isProductionEnvironment } from "./utils/environment";
 import "roboto-fontface/css/roboto/roboto-fontface.css";
 import "./style.scss";
 
@@ -21,7 +22,7 @@ class App extends React.Component<{ login?: LoginState }, undefined> {
             <div>
                 <Router history={browserHistory} routes={rootRoute} />
                 <Shim />
-                <DevTools />
+                {!isProductionEnvironment() && <DevTools />}
             </div>
         );
      }

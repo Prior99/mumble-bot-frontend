@@ -1,7 +1,9 @@
 const Webpack = require('webpack');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
 
 const extractCSS = new ExtractTextPlugin('[name].css');
+const gitRevision = new GitRevisionPlugin();
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -64,6 +66,11 @@ module.exports = {
         },
     },
     plugins: [
-        extractCSS
+        extractCSS,
+        new Webpack.DefinePlugin({
+            // Taken and adapted from the official README.
+            // See: https://www.npmjs.com/package/git-revision-webpack-plugin
+            "MUMBLE_BOT_VERSION": JSON.stringify(gitRevision.version())
+        })
     ],
 };
