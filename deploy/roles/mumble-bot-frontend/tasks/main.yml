@@ -1,0 +1,15 @@
+---
+
+- name: create directory
+  file: path=/storage/prior/applications/mumble-bot-frontend state=directory
+
+- name: fetch latest artifact
+  unarchive:
+    src: https://git.92k.de/prior/mumble-bot-frontend/builds/artifacts/feat/deploy/download?job=build
+    dest: /storage/prior/applications/mumble-bot-frontend
+    remote_src: yes
+
+- name: configure
+  template:
+    src: config.js.j2
+    dest: '/storage/prior/applications/mumble-bot-frontend/config.js'
