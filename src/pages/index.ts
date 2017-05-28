@@ -3,3 +3,4 @@ export * from "./recordings";
 export * from "./cached";
 export * from "./sounds";
 export * from "./link";
+export * from "./sound-upload";

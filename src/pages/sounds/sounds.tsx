@@ -1,7 +1,6 @@
 import * as React from "react";
 import { inject, observer } from "mobx-react";
 import Input from "react-toolbox/lib/input";
-import { RecordingComponent, Query } from "../../ui";
 import { SoundsState } from "../../store";
 import { SoundComponent } from "../../ui/sound";
 import Infinite = require("react-infinite"); // tslint:disable-line
