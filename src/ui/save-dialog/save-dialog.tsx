@@ -7,8 +7,8 @@ import * as MdConfirm from "react-icons/lib/md/check-circle";
 import * as MdAdd from "react-icons/lib/md/add";
 import * as MdRemove from "react-icons/lib/md/remove";
 import { CachedState } from "../../store";
-import { LabelCloud, Visualization } from "../";
-import { getCachedVisualizationUrl } from "../../utils";
+import { LabelCloud } from "../";
+import * as style from "./style.scss";
 
 @inject("cached")
 @observer
@@ -36,26 +36,29 @@ export class SaveDialog extends React.Component<{ cached?: CachedState }, undefi
         ];
         return (
             <Dialog
+                    className={style.dialog}
                     actions={actions}
                     active={saving}
                     onEscKeyDown={cancelSave}
                     onOverlayClick={cancelSave}
                     title="Create new Recording">
-                <Visualization url={getCachedVisualizationUrl(cachedRecording)} duration={duration}/ >
-                <h3>Name</h3>
                 <Input
                     type="text"
                     label="Name"
                     value={name}
                     onChange={setSaveName}
                 />
-                <h3>Selected Tags</h3>
-                <LabelCloud
-                    icon={<MdRemove />}
-                    mode="selected"
-                    selectedLabels={labels}
-                    onLabelSelect={removeSaveLabel}/>
-                <h3>Available Tags</h3>
+                { labels.length > 0 &&
+                    <div>
+                        <b>Selected Tags</b>
+                        <LabelCloud
+                            icon={<MdRemove />}
+                            mode="selected"
+                            selectedLabels={labels}
+                            onLabelSelect={removeSaveLabel}/>
+                    </div>
+                }
+                <b>Available Tags</b>
                 <LabelCloud
                     icon={<MdAdd />}
                     mode="unselected"

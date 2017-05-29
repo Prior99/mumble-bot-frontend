@@ -5,6 +5,8 @@ body {
     padding: 0;
     font-size: 32pt;
     font-family: roboto;
+    font-size: 12pt;
+    color: rgb(0, 0, 0);
 }
 
 h1 {
@@ -23,4 +25,8 @@ h3 {
     font-size: 16pt;
     font-weight: normal;
     margin-bottom: 10pt;
+}
+
+b {
+    color: rgb(0, 0, 0);
 }
