@@ -12,3 +12,14 @@ export interface Sound {
      */
     used: number;
 }
+
+export enum UploadingState {
+    PENDING,
+    UPLOADING,
+    DONE
+}
+
+export interface UploadingSound {
+    file: File;
+    state: UploadingState;
+}

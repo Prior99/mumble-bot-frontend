@@ -9,3 +9,5 @@ export * from "./label";
 export * from "./label-cloud";
 export * from "./widgets";
 export * from "./sound";
+export * from "./upload-area";
+export * from "./uploading-sound";
