@@ -3,11 +3,13 @@
 - name: create directory
   file: path=/storage/prior/applications/mumble-bot-frontend state=directory
 
-- name: fetch latest artifact
-  unarchive:
-    src: 'https://git.92k.de/prior/mumble-bot-frontend/builds/artifacts/master/download?job=build'
-    dest: /storage/prior/applications/mumble-bot-frontend
-    remote_src: yes
+- name: copy files
+  copy:
+    src: "{{ item }}"
+    dest: /storage/prior/applications/mumble-bot-frontend/
+  with_items:
+    - index.html
+    - dist
 
 - name: configure
   template:
