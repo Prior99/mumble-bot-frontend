@@ -9,6 +9,8 @@ import ProgressBar from "react-toolbox/lib/progress_bar";
 import Navigation from "react-toolbox/lib/navigation";
 import { isLoading } from "../store";
 
+declare var MUMBLE_BOT_VERSION: string;
+
 @inject("ui", "login")
 @observer
 export class AppContainer extends React.Component<{ ui?: UiState, login?: LoginState }, undefined> {
@@ -25,7 +27,7 @@ export class AppContainer extends React.Component<{ ui?: UiState, login?: LoginS
                                     theme={{
                                         leftIcon: style.hamburgerMenu
                                     }}
-                                    title="Mumble Bot"
+                                    title={`Mumble Bot`}
                                     leftIcon={<MdMenu />}
                                     onLeftIconClick={toggleDrawer}
                                     className={style.appBar}>
@@ -53,6 +55,7 @@ export class AppContainer extends React.Component<{ ui?: UiState, login?: LoginS
                         </div>
                     ) : children
                 }
+                <div className={style.version}>{MUMBLE_BOT_VERSION}</div>
             </div>
         );
     }

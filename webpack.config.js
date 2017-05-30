@@ -3,7 +3,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
 
 const extractCSS = new ExtractTextPlugin('[name].css');
-const gitRevision = new GitRevisionPlugin();
+const gitRevision = new GitRevisionPlugin({ lightweightTags: true });
 
 module.exports = {
     entry: "./src/index.tsx",

@@ -24,4 +24,3 @@ export class PageSoundUpload extends React.Component<{ soundUpload?: SoundUpload
         );
     }
 }
-
