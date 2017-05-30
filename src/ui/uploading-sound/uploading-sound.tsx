@@ -36,4 +36,3 @@ export class UploadingSoundComponent extends React.Component<UploadingSoundCompo
         );
     }
 }
-

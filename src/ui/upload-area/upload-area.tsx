@@ -32,4 +32,3 @@ export class UploadArea extends React.Component<UploadAreaProps, void> {
         );
     }
 }
-

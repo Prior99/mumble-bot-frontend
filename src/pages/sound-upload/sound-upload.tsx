@@ -1,7 +1,7 @@
 import * as React from "react";
 import { inject, observer } from "mobx-react";
-import ProgressBar from 'react-toolbox/lib/progress_bar';
-import { List } from 'react-toolbox/lib/list';
+import ProgressBar from "react-toolbox/lib/progress_bar";
+import { List } from "react-toolbox/lib/list";
 import { SoundUploadState } from "../../store";
 import * as style from "./style.scss";
 import { UploadArea, UploadingSoundComponent } from "../../ui";

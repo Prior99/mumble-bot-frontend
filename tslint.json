@@ -56,7 +56,6 @@
         ],
         "curly": true,
         "label-position": true,
-        "no-conditional-assignment": true,
         "no-duplicate-variable": true,
         "no-empty": true,
         "no-eval": true,
