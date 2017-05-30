@@ -7,3 +7,4 @@ export * from "./ui";
 export * from "./cached";
 export * from "./queue";
 export * from "./sounds";
+export * from "./sound-upload";

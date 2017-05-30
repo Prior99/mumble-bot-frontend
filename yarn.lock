@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+"@types/bytes@^2.4.33":
+  version "2.4.33"
+  resolved "https://registry.yarnpkg.com/@types/bytes/-/bytes-2.4.33.tgz#5c614055c1cae736726c6970578197905941f7bd"
+
 "@types/crypto-js@^3.1.33":
   version "3.1.33"
   resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-3.1.33.tgz#7e6c91603533e0cd9f279a8405a9b9e379880c5d"
@@ -452,6 +456,10 @@ builtin-status-codes@^3.0.0:
 bytes@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.3.0.tgz#d5b680a165b6201739acb611542aabc2d8ceb070"
+
+bytes@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/bytes/-/bytes-2.5.0.tgz#4c9423ea2d252c270c41b2bdefeff9bb6b62c06a"
 
 camelcase-keys@^2.0.0:
   version "2.1.0"
