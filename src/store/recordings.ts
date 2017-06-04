@@ -38,7 +38,7 @@ export class RecordingsState {
     public get sorted() {
         const copy = [...this.allRecordings];
         copy.sort((a, b) =>
-            a.changed < b.changed ?  1 : b.changed < a.changed ? -1 : 0
+            a.submitted < b.submitted ?  1 : b.submitted < a.submitted ? -1 : 0
         );
         return copy;
     }
