@@ -8,7 +8,7 @@ import { sounds } from "./";
 const LOAD_TIMEOUT = 2000;
 
 export async function load() {
-    await recordings.loadStorage();
+    await recordings.refresh();
     await users.load();
     await cached.init();
     await labels.load();

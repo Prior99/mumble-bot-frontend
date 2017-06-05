@@ -3,15 +3,7 @@ import { listRecordings } from "../api";
 import { Recording } from "../types/recordings";
 import { filter } from "fuzzaldrin";
 
-const localStorageIdentifier = "mumble-bot-recordings-state";
-const localStorageVersion = 1;
 const REFRESH_INTERVAL = 3000;
-
-interface StorageState {
-    version: number;
-    lastRefresh: string;
-    recordings: Recording[];
-}
 
 export class RecordingsState {
     @observable public allRecordings: Recording[] = [];
@@ -23,12 +15,6 @@ export class RecordingsState {
 
     @action
     public loadStorage = async () => {
-        const jsonStorageState = localStorage.getItem(localStorageIdentifier);
-        if (jsonStorageState) {
-            const storageState: StorageState = JSON.parse(jsonStorageState);
-            this.allRecordings = storageState.recordings;
-            this.lastRefresh = new Date(storageState.lastRefresh);
-        }
         await this.refresh();
     }
 
@@ -83,15 +69,6 @@ export class RecordingsState {
     public removeFilterLabel = (labelId: number) =>
         this.filterLabels = this.filterLabels.filter(label => label !== labelId)
 
-    private storeStorage = () => {
-        const jsonStorageState = JSON.stringify({
-            version: localStorageVersion,
-            recordings: this.allRecordings,
-            lastRefresh: this.lastRefresh.toString()
-        });
-        localStorage.setItem(localStorageIdentifier, jsonStorageState);
-    }
-
     @action
     public refresh = async () => {
         this.loading = new Date();
@@ -99,7 +76,6 @@ export class RecordingsState {
         this.loading = undefined;
         this.allRecordings = [...this.allRecordings, ...recordings];
         this.lastRefresh = new Date();
-        this.storeStorage();
         setTimeout(this.refresh, REFRESH_INTERVAL);
     }
 
