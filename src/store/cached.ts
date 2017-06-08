@@ -51,12 +51,12 @@ export class CachedState {
     @action public pause = () => {
         this.paused = true;
         this.frozenCopy = [...this.allCachedRecordings];
-    };
+    }
 
     @action public unpause = () => {
         this.paused = false;
         this.frozenCopy = [];
-    };
+    }
 
     @action public startSaving = (id: number) => this.saveState = { id, name: "", labels: [] };
 

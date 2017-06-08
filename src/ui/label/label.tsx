@@ -20,7 +20,7 @@ export class LabelComponent extends React.Component<LabelComponentProps, undefin
         const { id, labels, amount, onClick, icon } = this.props;
         const label = labels.getLabel(id);
         if (!label) {
-            return null; // ts-lint:disable-line
+            return null; // tslint:disable-line
         }
         const { recordings, name } = label;
         const relevance = labels.getRelevance(label);

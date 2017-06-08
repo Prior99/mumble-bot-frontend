@@ -20,7 +20,12 @@ export class PageCached extends React.Component<CachedProps, undefined> {
         ));
         return (
             <div onMouseEnter={pause} onMouseLeave={unpause}>
-                { paused && <div className={style.pausedIndicator}><MdPaused style={{ verticalAlign: "top" }} /> Paused</div> }
+                {
+                    paused &&
+                    <div className={style.pausedIndicator}>
+                        <MdPaused style={{ verticalAlign: "top" }} /> Paused
+                    </div>
+                }
                 <div className={paused && style.paused}>
                     {cachedRecordings}
                     <SaveDialog />
