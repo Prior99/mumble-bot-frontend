@@ -19,6 +19,9 @@ export class LabelComponent extends React.Component<LabelComponentProps, undefin
     public render() {
         const { id, labels, amount, onClick, icon } = this.props;
         const label = labels.getLabel(id);
+        if (!label) {
+            return null; // ts-lint:disable-line
+        }
         const { recordings, name } = label;
         const relevance = labels.getRelevance(label);
         const paleColor = colorize(name, 1, 0.7 + (1.0 - relevance) * 0.3);

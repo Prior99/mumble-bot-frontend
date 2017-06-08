@@ -31,7 +31,7 @@ class App extends React.Component<{ login?: LoginState }, undefined> {
 async function main() {
     await login.loadStorage();
     if (login.loggedIn) {
-        await load();
+        load();
     }
     ReactDOM.render(
         <Provider {...Store}>
