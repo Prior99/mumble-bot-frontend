@@ -1,0 +1,15 @@
+@import "../../colors.scss";
+
+.paused {
+    margin-top: 50px;
+}
+
+.pausedIndicator {
+    position: sticky;
+    height: 30px;
+    top: 64px;
+    background: white;
+    text-align: center;
+    font-size: 30px;
+    padding:  15px 0 5px 0;
+}

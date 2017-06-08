@@ -3,6 +3,8 @@ import { inject, observer } from "mobx-react";
 import { CachedState } from "../../store";
 import { CachedComponent } from "../../ui/cached/cached";
 import { SaveDialog } from "../../ui";
+import * as MdPaused from "react-icons/lib/md/pause";
+import * as style from "./style.scss";
 
 interface CachedProps {
     cached?: CachedState;
@@ -12,14 +14,17 @@ interface CachedProps {
 @observer
 export class PageCached extends React.Component<CachedProps, undefined> {
     public render() {
-        const cachedRecordings = this.props.cached.sorted.map(cached => (
+        const { sorted, paused, pause, unpause } = this.props.cached;
+        const cachedRecordings = sorted.map(cached => (
             <CachedComponent cachedRecording={cached} key={cached.id} />
         ));
         return (
             <div>
-                <h1>Cached Recordings</h1>
-                {cachedRecordings}
-                <SaveDialog />
+                { paused && <div className={style.pausedIndicator}><MdPaused style={{ verticalAlign: "top" }} /> Paused</div> }
+                <div className={paused && style.paused} onMouseEnter={pause} onMouseLeave={unpause}>
+                    {cachedRecordings}
+                    <SaveDialog />
+                </div>
             </div>
         );
     }

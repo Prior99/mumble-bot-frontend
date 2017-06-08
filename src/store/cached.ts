@@ -39,11 +39,23 @@ export class CachedState {
     @observable public cacheAmount = 0;
     @observable public saveState: SaveState;
     @observable public loading: Date;
+    @observable public paused: boolean;
+    @observable public frozenCopy: CachedRecording[] = [];
 
     @computed
     public get saving() {
         return this.saveState !== undefined;
     }
+
+    @action public pause = () => {
+        this.paused = true;
+        this.frozenCopy = [...this.allCachedRecordings];
+    };
+
+    @action public unpause = () => {
+        this.paused = false;
+        this.frozenCopy = [];
+    };
 
     @action public startSaving = (id: number) => this.saveState = { id, name: "", labels: [] };
 
@@ -67,7 +79,7 @@ export class CachedState {
 
     @computed
     public get sorted() {
-        const sorted = [...this.allCachedRecordings];
+        const sorted = [...(this.paused ? this.frozenCopy : this.allCachedRecordings)];
         sorted.sort((a, b) => {
             if (b.protected && !a.protected) {
                 return 1;
