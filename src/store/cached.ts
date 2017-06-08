@@ -41,6 +41,7 @@ export class CachedState {
     @observable public loading: Date;
     @observable public paused: boolean;
     @observable public frozenCopy: CachedRecording[] = [];
+    @observable public disconnected = true;
 
     @computed
     public get saving() {
@@ -97,6 +98,7 @@ export class CachedState {
         const { list, cacheAmount } = message;
         this.allCachedRecordings = list.map(cached => ({ ...cached, date: new Date(cached.date) }));
         this.cacheAmount = cacheAmount;
+        this.disconnected = false;
     }
 
     @action
@@ -120,22 +122,34 @@ export class CachedState {
     }
 
     public init = async (): Promise<void> => {
-        const socket = await callWebsocket("/recordings/cached/websocket");
-        socket.addEventListener("message", event => {
-            const message: Message = JSON.parse(event.data);
-            if (message.type === "init") {
-                return this.handleInit(message);
-            }
-            if (message.type === "add") {
-                return this.handleAdd(message);
-            }
-            if (message.type === "remove") {
-                return this.handleRemove(message);
-            }
-            if (message.type === "protect") {
-                return this.handleProtect(message);
-            }
-        });
+        try {
+            const socket = await callWebsocket("/recordings/cached/websocket");
+            socket.addEventListener("message", event => {
+                const message: Message = JSON.parse(event.data);
+                if (message.type === "init") {
+                    return this.handleInit(message);
+                }
+                if (message.type === "add") {
+                    return this.handleAdd(message);
+                }
+                if (message.type === "remove") {
+                    return this.handleRemove(message);
+                }
+                if (message.type === "protect") {
+                    return this.handleProtect(message);
+                }
+            });
+            socket.addEventListener("close", () => {
+                this.disconnected = true;
+                this.init();
+            });
+            socket.addEventListener("error", () => {
+                this.disconnected = true;
+                this.init();
+            });
+        } catch(err) {
+            setTimeout(this.init, 1000);
+        }
     }
 }
 

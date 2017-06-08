@@ -31,12 +31,21 @@ export async function checkAuth(): Promise<boolean> {
 }
 
 export function callWebsocket(url: string): Promise<WebSocket> {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-        const websocket = new WebSocket(`${protocol}//${baseUrl}${url}`, [login.username, login.encryptedPassword]);
-        websocket.addEventListener("open", () => {
-            resolve(websocket);
-        });
+        try {
+            const websocket = new WebSocket(`${protocol}//${baseUrl}${url}`, [login.username, login.encryptedPassword]);
+            const errorListener = (err) => {
+                reject(err);
+            };
+            websocket.addEventListener("open", () => {
+                websocket.removeEventListener("error", errorListener);
+                resolve(websocket);
+            });
+            websocket.addEventListener("error", errorListener);
+        } catch(err) {
+            reject(err);
+        }
     });
 }
 

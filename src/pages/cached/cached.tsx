@@ -19,9 +19,9 @@ export class PageCached extends React.Component<CachedProps, undefined> {
             <CachedComponent cachedRecording={cached} key={cached.id} />
         ));
         return (
-            <div>
+            <div onMouseEnter={pause} onMouseLeave={unpause}>
                 { paused && <div className={style.pausedIndicator}><MdPaused style={{ verticalAlign: "top" }} /> Paused</div> }
-                <div className={paused && style.paused} onMouseEnter={pause} onMouseLeave={unpause}>
+                <div className={paused && style.paused}>
                     {cachedRecordings}
                     <SaveDialog />
                 </div>

@@ -39,3 +39,7 @@ export function isLoading(): boolean {
         isBusy(labels.loading) ||
         isBusy(sounds.loading);
 }
+
+export function isDisconnected(): boolean {
+    return cached.disconnected || queue.disconnected;
+}

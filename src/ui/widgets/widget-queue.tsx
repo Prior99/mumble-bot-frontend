@@ -2,6 +2,7 @@ import * as React from "react";
 import * as MdRecording from "react-icons/lib/md/mic";
 import * as MdSound from "react-icons/lib/md/play-arrow";
 import * as MdCached from "react-icons/lib/md/cached";
+import * as MdQueue from "react-icons/lib/md/list";
 import * as MdDialog from "react-icons/lib/md/list";
 import * as moment from "moment";
 import { observer, inject } from "mobx-react";
@@ -94,7 +95,7 @@ export class WidgetQueue extends React.Component<WidgetQueueProps, undefined> {
         const items = queue.map(item => QueueItemElement({ item, recordings, users, cached, sounds }));
         return (
             <Card>
-                <CardTitle>Queue</CardTitle>
+                <CardTitle style={{ fontSize: "24px" }}><MdQueue /> Queue</CardTitle>
                 <List>
                     {items.length > 0 ? items : <CardText>It appears to be empty.</CardText>}
                 </List>

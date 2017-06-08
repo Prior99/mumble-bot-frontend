@@ -28,11 +28,13 @@ type Message = MessageInit | MessageEnqueue | MessageDequeue | MessageClear;
 
 export class QueueState {
     @observable public queue: QueueItem[] = [];
+    @observable public disconnected = true;
 
     @action
     private handleInit = (message: MessageInit) => {
         const { queue } = message;
         this.queue = queue.map(queueItem => ({ ...queueItem, time: new Date(queueItem.time) }));
+        this.disconnected = false;
     }
 
     @action
@@ -54,22 +56,34 @@ export class QueueState {
     }
 
     public init = async (): Promise<void> => {
-        const socket = await callWebsocket("/queue");
-        socket.addEventListener("message", event => {
-            const message: Message = JSON.parse(event.data);
-            if (message.type === "init") {
-                return this.handleInit(message);
-            }
-            if (message.type === "enqueue") {
-                return this.handleEnqueue(message);
-            }
-            if (message.type === "dequeue") {
-                return this.handleDequeue(message);
-            }
-            if (message.type === "clear") {
-                return this.handleClear(message);
-            }
-        });
+        try {
+            const socket = await callWebsocket("/queue");
+            socket.addEventListener("message", event => {
+                const message: Message = JSON.parse(event.data);
+                if (message.type === "init") {
+                    return this.handleInit(message);
+                }
+                if (message.type === "enqueue") {
+                    return this.handleEnqueue(message);
+                }
+                if (message.type === "dequeue") {
+                    return this.handleDequeue(message);
+                }
+                if (message.type === "clear") {
+                    return this.handleClear(message);
+                }
+            });
+            socket.addEventListener("close", () => {
+                this.disconnected = true;
+                this.init();
+            });
+            socket.addEventListener("error", () => {
+                this.disconnected = true;
+                this.init();
+            });
+        } catch(err) {
+            setTimeout(this.init, 1000);
+        }
     }
 }
 
