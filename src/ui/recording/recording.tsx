@@ -14,24 +14,25 @@ import { play, preview } from "../../api";
 import * as moment from "moment";
 import "moment-duration-format";
 import { Visualization } from "../visualization";
-import { UsersState } from "../../store";
+import { UsersState, RecordingsState } from "../../store";
 import { getRecordingVisualizationUrl } from "../../utils";
 import { LabelComponent } from "../";
 
 interface RecordingComponentProps {
     recording: Recording;
+    recordings?: RecordingsState;
     users?: UsersState;
 }
 
-@inject("users")
+@inject("users", "recordings")
 @observer
 export class RecordingComponent extends React.Component<RecordingComponentProps, undefined> {
     public render() {
-        const { recording, users } = this.props;
+        const { recording, users, recordings } = this.props;
         const { quote, id, duration, submitted, reporter: reporterId, user: userId, labels } = recording;
         const user = users.getUser(userId);
         const reporter = users.getUser(reporterId);
-        const onPlay = () => play(id);
+        const onPlay = () => play(id, recordings.pitch);
         const onPreview = () => preview(id);
         const labelElements = labels.map(labelId => <LabelComponent key={labelId} id={labelId} />);
         return (

@@ -12,8 +12,8 @@ export async function listRecordings(since?: Date): Promise<Recording[]> {
     }
 }
 
-export async function play(recordingId: number): Promise<void> {
-    await callApi(`/recordings/${recordingId}/play`, undefined, "POST");
+export async function play(recordingId: number, pitch = 0): Promise<void> {
+    await callApi(`/recordings/${recordingId}/play`, { pitch }, "POST");
 }
 
 export function preview(id: number) {

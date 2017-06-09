@@ -12,6 +12,7 @@ export class RecordingsState {
     @observable public query = "";
     @observable public filterUsers: number[] = [];
     @observable public filterLabels: number[] = [];
+    @observable public pitch = 0;
 
     @action
     public loadStorage = async () => {
@@ -28,6 +29,9 @@ export class RecordingsState {
         );
         return copy;
     }
+
+    @action
+    public setPitch = (pitch: number) => this.pitch = pitch
 
     @computed
     public get visibleRecordings() {
